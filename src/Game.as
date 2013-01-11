@@ -44,6 +44,7 @@ package
 			{
 				add(new CatFood(o.@x, o.@y));
 			}
+
 			for each (o in levelXML.tiles[0].tile)
 			{				
 				tiles.AddTile(o.@x, o.@y, o.@id);
@@ -55,11 +56,15 @@ package
 			add(tiles);
 			add(tilesForeground);
 			add(collisionGrid);
+			
 			for each (o in levelXML.entities[0].playerStart)
 			{				
 				add(new Player(o.@x, o.@y));
 			}
-
+			for each (o in levelXML.entities[0].blueBizDog)
+			{
+				add(new BlueBizDog(o.@x, o.@y));
+			}
 			
 			
 		}
