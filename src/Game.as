@@ -13,9 +13,10 @@ package
 		private var tiles:Tiles = new Tiles(2560, 480);
 		private var tilesForeground:Tiles = new Tiles(2560, 480);
 		private var collisionGrid:CollisionGrid = new CollisionGrid(2560, 480, 8, 8);
+		private var player:Player;
 		
 		public function Game() 
-		{
+		{			
 			LoadLevel( );
 		}
 		
@@ -59,7 +60,7 @@ package
 			
 			for each (o in levelXML.entities[0].playerStart)
 			{				
-				add(new Player(o.@x, o.@y));
+				add(player = new Player(o.@x, o.@y));
 			}
 			for each (o in levelXML.entities[0].blueBizDog)
 			{

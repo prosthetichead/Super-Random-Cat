@@ -28,6 +28,7 @@ package
 			this.y = y;
 			graphic = sprBlueBizDog;
 			setHitbox(16, 32, 0, 0);
+			type = "blueBizDog";
 		}
 		
 		override public function update():void
@@ -77,6 +78,11 @@ package
 			{ 
 				speed.x = FP.sign(speed.x) * maxspeed;
 			}
+		}
+		
+		public function destroy():void
+		{
+			FP.world.remove(this);
 		}
 		
 	}

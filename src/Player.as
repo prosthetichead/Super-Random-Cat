@@ -31,6 +31,7 @@ package
 		public var onGround:Boolean = false;
 		private var frozen:Boolean = false;
 		
+		private var blueBizDog:BlueBizDog;
 		
 		public function Player(x:int, y:int) 
 		{
@@ -52,40 +53,70 @@ package
 			this.x = x;
 			this.y = y;
 
-			setHitbox(32, 16);
-			originY = -16;
+			setHitbox(18,19,-10, -13);
 			type = "player";
 			collidable = true;
+			
+			
 			
 		}
 		
 		override public function update():void
 		{
-			
 			//ground check
  			onGround = (collide("collisionGrid", x, y + 1) || (collide("platform", x, y + 1) && !collide("platform", x, y)));
-
-			//move left
+			
+			blueBizDog = collide("blueBizDog", x, y) as BlueBizDog;
+			if (blueBizDog && !onGround)
+			{
+				if (blueBizDog.top < this.top)
+				{
+					speed.y = - 5;
+					blueBizDog.destroy();
+				}
+			}
+			else if (blueBizDog)
+				trace("DEAD PLAYER");
+			
+			if (sprPlayer.currentAnim == "walkLeft" || sprPlayer.currentAnim == "standLeft")
+			{
+				setHitbox(18, 19, -4, -13);
+			}
+			else
+			{
+				setHitbox(18, 19, -10, -13);
+			}
+		
+			if (Input.check("sprint"))
+			{
+				maxspeed = 4;
+				acceleration = 2;
+			}
+			else
+			{
+				maxspeed = 2;
+				acceleration = .5;
+			}
+			
 			if (Input.check("left"))
 			{
 				sprPlayer.play("walkLeft");
 				if (onGround) { speed.x -= acceleration; }
 				else { speed.x -= acceleration * airControl; }
 			}
-			//move right
 			if (Input.check("right"))
 			{
 				sprPlayer.play("walkRight");
 				if (onGround) { speed.x += acceleration; }
 				else { speed.x += acceleration * airControl; }
 			}
-			//drop
+			
 			if (Input.check("down") && Input.check("jump"))
 			{
 				if (collide("platform", x, y + 1) && !collide("collisionGrid", x, y + 1)) { y++; }
 			}
-			//jump
-			else if (Input.check("jump") && onGround) { speed.y = - jump; }
+			else if (Input.pressed("jump") && onGround) { speed.y = - jump; }
+			
 			if (!Input.check("jump") && speed.y < 0) { speed.y += gravity; }
 			
 			//falling
@@ -146,7 +177,7 @@ package
 				//Game.finished = true;
 			}
 			
-			//camera
+			//camera			
 			FP.camera.x += Math.round(((x - FP.width / 4) - FP.camera.x) / 10);
 			FP.camera.y += Math.round(((y - FP.height / 4) - FP.camera.y) / 10);
 			
