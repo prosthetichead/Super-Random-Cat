@@ -29,9 +29,12 @@ package
 		public var maxFall:Number = 3.6;
 		public var airControl:Number = .5; //Percentage of control when airborne. Should be between 0 and 1 (inclusive).
 		public var onGround:Boolean = false;
-		private var frozen:Boolean = false;
+		private var dead:Boolean = false;
 		
 		private var blueBizDog:BlueBizDog;
+		
+		public static var score:int;
+		public static var lives:int;
 		
 		public function Player(x:int, y:int) 
 		{
@@ -40,12 +43,13 @@ package
 			sprPlayer.add("standRight", [4], 0, false);
 			sprPlayer.add("walkRight", [3, 4, 5], 10, true);
 			
-			
+			Input.define("up", Key.UP);
 			Input.define("left", Key.LEFT);
 			Input.define("right", Key.RIGHT);
 			Input.define("down", Key.DOWN);
 			Input.define("jump", Key.X);
 			Input.define("sprint", Key.Z);
+			Input.define("pause", Key.SPACE, Key.ENTER);
 			
 			graphic = sprPlayer;
 			sprPlayer.play("standRight");
@@ -61,24 +65,20 @@ package
 			
 		}
 		
-		override public function update():void
+		private function die():void 
 		{
-			//ground check
- 			onGround = (collide("collisionGrid", x, y + 1) || (collide("platform", x, y + 1) && !collide("platform", x, y)));
-			
-			blueBizDog = collide("blueBizDog", x, y) as BlueBizDog;
-			if (blueBizDog && !onGround)
-			{
-				if (blueBizDog.top < this.top)
-				{
-					speed.y = - 5;
-					blueBizDog.destroy();
-				}
-			}
-			else if (blueBizDog)
-				trace("DEAD PLAYER");
-			
-			if (sprPlayer.currentAnim == "walkLeft" || sprPlayer.currentAnim == "standLeft")
+			acceleration = 5;
+			speed.y = - 5
+			sprPlayer.angle = 90
+			sprPlayer.play("walkLeft");
+			dead = true;
+			//Game.reset = true;
+		}
+		
+		
+		private function checkForInput():void 
+		{
+			if(sprPlayer.currentAnim == "walkLeft" || sprPlayer.currentAnim == "standLeft")
 			{
 				setHitbox(18, 19, -4, -13);
 			}
@@ -119,33 +119,6 @@ package
 			
 			if (!Input.check("jump") && speed.y < 0) { speed.y += gravity; }
 			
-			//falling
-			speed.y += gravity;
-			
-			//horizontal collisions
-			for (var i:int = 0; i < Math.abs(speed.x); i += 1)
-			{
-				if (!collide("collisionGrid", x + FP.sign(speed.x), y)) 
-				{ 
-					x += FP.sign(speed.x); 
-				} else 
-				{ 
-					if (speed.x > 0) { sprPlayer.play("standRight"); } else { sprPlayer.play("standLeft"); }
-					
-					speed.x = 0; 
-				}
-			}
-			//vertical collisions
-			for (i = 0; i < Math.abs(speed.y); i += 1)
-			{
-				if (!collide("collisionGrid", x, y + FP.sign(speed.y)) && !(collide("platform", x, y + 1) && speed.y > 0 && !collide("platform", x, y)))
-				{
-					y += FP.sign(speed.y);
-				}
-				else { speed.y = 0; }
-			}
-			
-			//idling
 			if ((!Input.check("left") && !Input.check("right")) || (Input.check("left") && Input.check("right")))
 			{
 				if (speed.x > 0) 
@@ -167,22 +140,99 @@ package
 					if (speed.x > 0) { speed.x = 0; }
 				}
 			}
+		}
+		
+		private function checkEnemyCollisons():void 
+		{
+			blueBizDog = collide("blueBizDog", x, y) as BlueBizDog;
+			if (blueBizDog && !onGround)
+			{
+				if (blueBizDog.top < this.top)
+				{
+					speed.y = - 5;
+					blueBizDog.destroy();
+				}
+			}
+			else if (blueBizDog)
+			{
+				die()
+			}	
+		}
+		
+		private function movement(colide:Boolean = true):void 
+		{
+			if (colide)
+			{
+				//horizontal collisions
+				for (var i:int = 0; i < Math.abs(speed.x); i += 1)
+				{
+					if (!collide("collisionGrid", x + FP.sign(speed.x), y)) 
+					{ 
+						x += FP.sign(speed.x); 
+					} 
+					else 
+					{ 
+						if (speed.x > 0) { sprPlayer.play("standRight"); } else { sprPlayer.play("standLeft"); }
+							speed.x = 0; 
+					}
+				}
+				//vertical collisions
+				for (i = 0; i < Math.abs(speed.y); i += 1)
+				{
+					if (!collide("collisionGrid", x, y + FP.sign(speed.y)) && !(collide("platform", x, y + 1) && speed.y > 0 && !collide("platform", x, y)))
+					{
+						y += FP.sign(speed.y);
+					}
+					else { speed.y = 0; }
+				}
+				
+				if (Math.abs(speed.x) > maxspeed) { speed.x = FP.sign(speed.x) * maxspeed; }
+				if (speed.y > maxFall) { speed.y = maxFall; }
+			}
+			else
+			{
+				for (var i:int = 0; i < Math.abs(speed.y); i += 1)
+					y += FP.sign(speed.y);
+					
+				for (i = 0; i < Math.abs(speed.x); i += 1)
+					x += FP.sign(speed.x);
+			}
 			
-			//speed limits
-			if (Math.abs(speed.x) > maxspeed) { speed.x = FP.sign(speed.x) * maxspeed; }
-			if (speed.y > maxFall) { speed.y = maxFall; }
 			
+			if (y > Game.levelHeight + 40 )
+			{
+				Game.reset = true;
+			}
+		}
+		
+		
+		
+		override public function update():void
+		{
+			//ground check
+ 			onGround = (collide("collisionGrid", x, y + 1) || (collide("platform", x, y + 1) && !collide("platform", x, y)));
+			//gravity
+			speed.y += gravity;
+
+			if (!dead)
+			{
+				checkEnemyCollisons();					
+				checkForInput();
+				movement();
+			}
+			else
+			{
+				movement(false);
+			}
+
 			if (collide("finish", x, y)) {
-				frozen = true;
+				
 				//Game.finished = true;
 			}
 			
 			//camera			
 			FP.camera.x += Math.round(((x - FP.width / 4) - FP.camera.x) / 10);
 			FP.camera.y += Math.round(((y - FP.height / 4) - FP.camera.y) / 10);
-			
-			
-			
 		}
 
 		

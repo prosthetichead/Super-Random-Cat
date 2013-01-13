@@ -20,8 +20,6 @@ package
 		{
 			if (!boucing)
 				return true;
-			
-				
 		}
 		
 	}

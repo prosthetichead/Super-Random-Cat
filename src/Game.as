@@ -5,6 +5,8 @@ package
 	import net.flashpunk.World;
 	import net.flashpunk.FP; 
 	import flash.utils.ByteArray;
+	import net.flashpunk.utils.Input;
+	
 	
 	public class Game extends World
 	{	
@@ -14,6 +16,9 @@ package
 		private var tilesForeground:Tiles = new Tiles(2560, 480);
 		private var collisionGrid:CollisionGrid = new CollisionGrid(2560, 480, 8, 8);
 		private var player:Player;
+		public static var pause:Boolean = false;
+		public static var reset:Boolean = false;
+		public static var levelHeight:Number = 480;
 		
 		public function Game() 
 		{			
@@ -57,7 +62,10 @@ package
 			add(tiles);
 			add(tilesForeground);
 			add(collisionGrid);
-			
+			for each (o in levelXML.entities[0].signPost)
+			{
+				add(new SignPost(o.@x, o.@y, o.@signInfo));
+			}
 			for each (o in levelXML.entities[0].playerStart)
 			{				
 				add(player = new Player(o.@x, o.@y));
@@ -68,15 +76,33 @@ package
 			}
 			
 			
+			
+			
+			add(new textBox(player.x, player.y));
 		}
+
 		override public function update():void
 		{
-			super.update();
+			if (!pause)
+			{
+				super.update(); 
+			}
 			
 			camera.x = FP.clamp(camera.x, 0, 2560);
 			camera.y = FP.clamp(camera.y, 0, 240);
+			
+			if (Input.pressed("pause"))
+				Game.pause = !Game.pause;
+			if (reset)
+				resetLevel();
 		}
 		
+		public function resetLevel():void
+		{
+			reset = false;
+			removeAll()
+			LoadLevel();
+		}
 		
 	}
 }

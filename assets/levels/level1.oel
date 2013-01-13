@@ -43,6 +43,7 @@
     <platform id="16" x="144" y="288" />
     <platform id="17" x="128" y="256" />
     <blueBizDog id="26" x="384" y="224" />
+    <signPost id="19" x="160" y="224" signInfo="Info is writen here!&#xD;&#xA;To dash press and hold Z key." />
   </entities>
   <tiles tileset="tileKit" exportMode="XML">
     <tile x="0" y="8" id="4" />
@@ -76,6 +77,7 @@
     <tile x="3" y="2" id="217" />
     <tile x="3" y="5" id="163" />
     <tile x="3" y="6" id="175" />
+    <tile x="3" y="7" id="187" />
     <tile x="3" y="8" id="5" />
     <tile x="3" y="9" id="16" />
     <tile x="3" y="10" id="16" />

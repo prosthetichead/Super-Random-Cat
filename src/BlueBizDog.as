@@ -78,6 +78,9 @@ package
 			{ 
 				speed.x = FP.sign(speed.x) * maxspeed;
 			}
+			
+			if (y > Game.levelHeight + 40)
+				destroy();
 		}
 		
 		public function destroy():void
