@@ -62,7 +62,7 @@ package
 			collidable = true;
 			
 			
-			
+			layer = 10;
 		}
 		
 		private function die():void 
@@ -72,7 +72,7 @@ package
 			sprPlayer.angle = 90
 			sprPlayer.play("walkLeft");
 			dead = true;
-			//Game.reset = true;
+			
 		}
 		
 		
@@ -201,7 +201,11 @@ package
 			
 			if (y > Game.levelHeight + 40 )
 			{
-				Game.reset = true;
+				Game.livesInfo.livesRemaining -= 1;
+				if (Game.livesInfo.livesRemaining > 0)
+					Game.reset = true;
+				else
+					Game.gameOver = true;
 			}
 		}
 		

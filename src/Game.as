@@ -12,23 +12,29 @@ package
 	{	
 		[Embed(source = "../assets/levels/level1.oel", mimeType = "application/octet-stream")] public var lvlLevel1:Class;
 		
-		private var tiles:Tiles = new Tiles(2560, 480);
-		private var tilesForeground:Tiles = new Tiles(2560, 480);
+		private var tiles:Tiles = new Tiles(2560, 480, 99);
+		private var tilesForeground:Tiles = new Tiles(2560, 480, 98);
 		private var collisionGrid:CollisionGrid = new CollisionGrid(2560, 480, 8, 8);
 		private var player:Player;
 		public static var pause:Boolean = false;
 		public static var reset:Boolean = false;
+		public static var gameOver:Boolean = false;
 		public static var levelHeight:Number = 480;
+		public static var livesInfo:LivesInfo = new LivesInfo();
 		
 		public function Game() 
-		{			
-			LoadLevel( );
+		{	
+			
+			LoadLevel();
 		}
 		
 
 		
 		public function LoadLevel():void 
 		{
+			
+			add(livesInfo);
+			
 			var o:XML;
 			
 			//get the xml file of the level
@@ -78,7 +84,7 @@ package
 			
 			
 			
-			add(new textBox(player.x, player.y));
+		//	add(new textBox(player.x, player.y, "THIS IS PLACE HOLDER TEXT"));
 		}
 
 		override public function update():void
@@ -95,6 +101,8 @@ package
 				Game.pause = !Game.pause;
 			if (reset)
 				resetLevel();
+			if (gameOver)
+				lose();
 		}
 		
 		public function resetLevel():void
@@ -104,5 +112,10 @@ package
 			LoadLevel();
 		}
 		
+		public function lose():void
+		{
+			gameOver = false;
+			removeAll();
+		}
 	}
 }

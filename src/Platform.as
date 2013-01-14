@@ -24,6 +24,8 @@ package
 			setHitbox(16, 1);
 			
 			collidable = true;
+			
+			layer = 100;
 		}
 	}
 

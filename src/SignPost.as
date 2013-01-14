@@ -3,7 +3,7 @@ package
 	
 	import net.flashpunk.Entity
 	import net.flashpunk.FP;
-	import net.flashpunk.graphics.Text;
+	//import net.flashpunk.graphics.Text;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 	
@@ -14,6 +14,7 @@ package
 		private var sprSignPost:Image;
 		public var message:String;
 		public var displayHelp:DisplayHelp;
+		private var textBoxArea:TextBoxArea;
 		
 		public function SignPost(x:int, y:int, message:String = "text here") 
 		{
@@ -23,7 +24,8 @@ package
 			sprSignPost = new Image(imgSignPost);	
 			graphic = sprSignPost;
 			setHitbox(32, 32, 0, 0);
-			type = "signPost";			
+			type = "signPost";	
+			layer = 95;
 		}
 		
 		override public function update():void 
@@ -39,8 +41,17 @@ package
 				displayHelp = null;
 			}
 				
-			if (Input.check("up") && Input.pressed("sprint")  &&  collide("player", x, y))
-				trace(message);
+			if (Input.check("up") && Input.pressed("sprint")  &&  collide("player", x, y) && !textBoxArea)
+			{
+				textBoxArea = new TextBoxArea(x, y, message);
+				FP.world.add(textBoxArea);
+			}
+			else if ((textBoxArea && Input.pressed("sprint")) || (!collide("player", x, y) && textBoxArea))
+			{
+				textBoxArea.distroy();
+				textBoxArea = null;
+			}
+				
 		}
 	}
 

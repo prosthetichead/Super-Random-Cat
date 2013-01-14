@@ -13,7 +13,7 @@ package
 		 
 		private var tiles:Tilemap;
 		
-		public function Tiles(width:int, height:int) 
+		public function Tiles(width:int, height:int, layer:int) 
 		{
 			tiles = new Tilemap(imgTileKit, width, height, 32, 32);
 			//tiles.setRect(0, 0, 640, 680, 3);
@@ -21,6 +21,7 @@ package
 			graphic = tiles;
 			collidable = false;
 			
+			this.layer = layer;
 		}
 		
 		public function AddTile(colx:int, coly:int, id:int):void 

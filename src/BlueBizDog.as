@@ -29,6 +29,8 @@ package
 			graphic = sprBlueBizDog;
 			setHitbox(16, 32, 0, 0);
 			type = "blueBizDog";
+			
+			layer = 15;
 		}
 		
 		override public function update():void

@@ -20,6 +20,8 @@ package
 			setHitbox(10, 10);
 		
 			collidable = true;
+			
+			layer = 95;
 		}
 		
 		override public function update():void

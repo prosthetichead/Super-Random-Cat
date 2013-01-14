@@ -19,6 +19,8 @@ package
 			this.x = x;
 			this.y = y;
 			sprUpX.alpha = 0;
+			
+			layer = 97;
 		}
 		
 		
