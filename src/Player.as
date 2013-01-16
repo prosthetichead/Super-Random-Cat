@@ -235,8 +235,7 @@ package
 			}
 			
 			//camera			
-			FP.camera.x += Math.round(((x - FP.width / 4) - FP.camera.x) / 10);
-			FP.camera.y += Math.round(((y - FP.height / 4) - FP.camera.y) / 10);
+
 		}
 
 		

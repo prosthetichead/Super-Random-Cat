@@ -10,21 +10,28 @@ package
 	
 	public class Game extends World
 	{	
+		
 		[Embed(source = "../assets/levels/level1.oel", mimeType = "application/octet-stream")] public var lvlLevel1:Class;
 		
-		private var tiles:Tiles = new Tiles(2560, 480, 99);
-		private var tilesForeground:Tiles = new Tiles(2560, 480, 98);
-		private var collisionGrid:CollisionGrid = new CollisionGrid(2560, 480, 8, 8);
+		public var levels:Array = new Array(lvlLevel1);
+		public var currentLevel:int = 0; //level 0  is first level
+		
+		private var tiles:Tiles = new Tiles(2560, 2560, 99);
+		private var tilesForeground:Tiles = new Tiles(2560, 2560, 98);
+		private var collisionGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8);
 		private var player:Player;
+		private var pauseScreen:PauseScreen = new PauseScreen();
 		public static var pause:Boolean = false;
 		public static var reset:Boolean = false;
 		public static var gameOver:Boolean = false;
-		public static var levelHeight:Number = 480;
+		public static var levelHeight:Number = 2560;
+		public static var levelWidth:Number = 2560;
 		public static var livesInfo:LivesInfo = new LivesInfo();
 		
 		public function Game() 
 		{	
-			
+			pauseScreen.visible = false;
+			add(pauseScreen);
 			LoadLevel();
 		}
 		
@@ -32,17 +39,17 @@ package
 		
 		public function LoadLevel():void 
 		{
-			
-			add(livesInfo);
-			
-			var o:XML;
+			if (currentLevel != 0)
+				add(livesInfo);
 			
 			//get the xml file of the level
-			var file:ByteArray = new lvlLevel1;
+			var o:XML;
+			var file:ByteArray = new levels[currentLevel];
 			var str:String = file.readUTFBytes( file.length );
 			var levelXML:XML = new XML(str);
 			
-			//trace(levelXML);
+			levelHeight = levelXML.@height;
+			levelWidth  = levelXML.@width;
 			
 			for each (o in levelXML.walls[0].rect)
 			{				
@@ -56,7 +63,6 @@ package
 			{
 				add(new CatFood(o.@x, o.@y));
 			}
-
 			for each (o in levelXML.tiles[0].tile)
 			{				
 				tiles.AddTile(o.@x, o.@y, o.@id);
@@ -83,19 +89,24 @@ package
 			
 			
 			
-			
-		//	add(new textBox(player.x, player.y, "THIS IS PLACE HOLDER TEXT"));
 		}
 
 		override public function update():void
 		{
 			if (!pause)
 			{
+				pauseScreen.visible = false;
 				super.update(); 
 			}
+			else
+			{
+				pauseScreen.visible = true;
+			}
 			
-			camera.x = FP.clamp(camera.x, 0, 2560);
-			camera.y = FP.clamp(camera.y, 0, 240);
+			camera.x += Math.round(((player.x - FP.width / 4) - FP.camera.x) / 10);
+			camera.y += Math.round(((player.y - FP.height / 4) - FP.camera.y) / 10);
+			
+			FP.clampInRect(camera, 0, 0,  levelWidth - FP.width,  levelHeight - FP.height);
 			
 			if (Input.pressed("pause"))
 				Game.pause = !Game.pause;
