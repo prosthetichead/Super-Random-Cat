@@ -13,10 +13,12 @@ package
 	//import net.flashpunk.utils.Draw;
 	import net.flashpunk.utils.Input
 	import net.flashpunk.utils.Key;
+	import net.flashpunk.Sfx;
 	 
 	public class Player extends Entity
 	{
 		[Embed(source = "../assets/gfx/player.png")] private const PLAYER_SPRITE:Class;
+		[Embed(source = "../assets/sfx/jumpLand.mp3")] private const mp3JumpLand:Class;
 		public var sprPlayer:Spritemap = new Spritemap(PLAYER_SPRITE, 32, 32);
 		
 		
@@ -29,19 +31,21 @@ package
 		public var maxFall:Number = 3.6;
 		public var airControl:Number = .5; //Percentage of control when airborne. Should be between 0 and 1 (inclusive).
 		public var onGround:Boolean = false;
-		private var dead:Boolean = false;
+		public var dead:Boolean = false;
+		private var landed:Boolean = true;
 		
-		private var blueBizDog:BlueBizDog;
 		
 		public static var score:int;
 		public static var lives:int;
 		
+		public var sfxJumpLand:Sfx = new Sfx(mp3JumpLand);
+		
 		public function Player(x:int, y:int) 
 		{
-			sprPlayer.add("standLeft", [1], 0, true);
-			sprPlayer.add("walkLeft", [0, 1, 2], 10, true);
-			sprPlayer.add("standRight", [4], 0, false);
-			sprPlayer.add("walkRight", [3, 4, 5], 10, true);
+			sprPlayer.add("standLeft", [8,9,10,11], 5, true);
+			sprPlayer.add("walkLeft", [0, 1, 2, 3], 10, true);
+			sprPlayer.add("standRight", [12,13,14,15], 5, true);
+			sprPlayer.add("walkRight", [4, 5, 6,7], 10, true);
 			
 			Input.define("up", Key.UP);
 			Input.define("left", Key.LEFT);
@@ -67,8 +71,13 @@ package
 		
 		private function die():void 
 		{
+			
+			
+			
+			Game.music.stop();
+			Game.musicDie.play(.1);
 			acceleration = 5;
-			speed.y = - 5
+			speed.y = - 7
 			sprPlayer.angle = 90
 			sprPlayer.play("walkLeft");
 			dead = true;
@@ -144,16 +153,30 @@ package
 		
 		private function checkEnemyCollisons():void 
 		{
-			blueBizDog = collide("blueBizDog", x, y) as BlueBizDog;
-			if (blueBizDog && !onGround)
+			var redBizDog:RedBizDog = collide("RedBizDog", x, y) as RedBizDog;
+			var blueBizDog:BlueBizDog = collide("BlueBizDog", x, y) as BlueBizDog;
+			
+			if (redBizDog && !onGround)
 			{
-				if (blueBizDog.top < this.top)
+				if (redBizDog.top < this.bottom)
+				{
+					speed.y = - 5;
+					redBizDog.destroy();
+				}
+				else
+					die();
+			}
+			else if (blueBizDog && !onGround)
+			{
+				if (blueBizDog.top < this.bottom)
 				{
 					speed.y = - 5;
 					blueBizDog.destroy();
 				}
+				else
+					die();
 			}
-			else if (blueBizDog)
+			else if (redBizDog || blueBizDog)
 			{
 				die()
 			}	
@@ -183,7 +206,11 @@ package
 					{
 						y += FP.sign(speed.y);
 					}
-					else { speed.y = 0; }
+					else
+					{ 
+						
+						speed.y = 0; 
+					}
 				}
 				
 				if (Math.abs(speed.x) > maxspeed) { speed.x = FP.sign(speed.x) * maxspeed; }
@@ -199,13 +226,21 @@ package
 			}
 			
 			
-			if (y > Game.levelHeight + 40 )
+			if (y > Game.levelHeight + 5 )
 			{
-				Game.livesInfo.livesRemaining -= 1;
-				if (Game.livesInfo.livesRemaining > 0)
+				if (dead)
+				{
+				Game.infoText.lives -= 1;
+				if (Game.infoText.lives > 0)
 					Game.reset = true;
 				else
 					Game.gameOver = true;
+				}
+				else 
+				{
+					die();	
+				}
+				
 			}
 		}
 		
@@ -214,7 +249,14 @@ package
 		override public function update():void
 		{
 			//ground check
- 			onGround = (collide("collisionGrid", x, y + 1) || (collide("platform", x, y + 1) && !collide("platform", x, y)));
+ 			onGround = (collide("collisionGrid", x, y + 1) || (collide("platform", x, y + 1) && !collide("platform", x, y)) || dead);
+			if (!onGround)
+				landed = false;
+			if (onGround && !landed)
+			{
+				sfxJumpLand.play();
+				landed = true;
+			}	
 			//gravity
 			speed.y += gravity;
 

@@ -16,7 +16,7 @@
     <Width>2560</Width>
     <Height>2560</Height>
   </LevelMaximumSize>
-  <Filename>C:\GameDev\Flash\SuperRandomCat\assets\levels\SuperRandomCat.oep</Filename>
+  <Filename>C:\GameDev\Flash\superRandomCat\assets\levels\SuperRandomCat.oep</Filename>
   <AngleMode>Degrees</AngleMode>
   <CameraEnabled>true</CameraEnabled>
   <CameraSize>
@@ -192,6 +192,36 @@
       <ValueDefinitions>
         <ValueDefinition xsi:type="StringValueDefinition" Name="signInfo" Default="Info is writen here!&#xD;&#xA;To dash press and hold Z key." MaxChars="-1" MultiLine="true" />
       </ValueDefinitions>
+      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
+    </EntityDefinition>
+    <EntityDefinition Name="redBizDog" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>16</Width>
+        <Height>32</Height>
+      </Size>
+      <Origin>
+        <X>0</X>
+        <Y>0</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Image" ImagePath="..\gfx\redBizDog.png" Tiled="false">
+        <RectColor A="255" R="255" G="0" B="0" />
+      </ImageDefinition>
+      <ValueDefinitions />
+      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
+    </EntityDefinition>
+    <EntityDefinition Name="smashBlock" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>32</Width>
+        <Height>32</Height>
+      </Size>
+      <Origin>
+        <X>0</X>
+        <Y>0</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Image" ImagePath="..\gfx\smashBlock.png" Tiled="false">
+        <RectColor A="255" R="255" G="0" B="0" />
+      </ImageDefinition>
+      <ValueDefinitions />
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>
   </EntityDefinitions>

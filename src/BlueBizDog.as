@@ -4,13 +4,16 @@ package
 	import net.flashpunk.graphics.Spritemap;
 	import flash.geom.Point;
 	import net.flashpunk.FP;
+	import net.flashpunk.Sfx;
 		
 	 
 	 
 	public class BlueBizDog extends Entity
 	{
 		[Embed(source = "../assets/gfx/bizDogs.png")] private const imgBlueBizDog:Class;
+		[Embed(source="../assets/sfx/dogDie.mp3")] private const mp3DogDie:Class;
 		public var sprBlueBizDog:Spritemap = new Spritemap(imgBlueBizDog, 16, 32);
+		private var sfxDogDie:Sfx = new Sfx(mp3DogDie);
 		
 		public var speed:Point = new Point(0, 0);
 		private var onGround:Boolean;
@@ -28,7 +31,7 @@ package
 			this.y = y;
 			graphic = sprBlueBizDog;
 			setHitbox(16, 32, 0, 0);
-			type = "blueBizDog";
+			type = "BlueBizDog";
 			
 			layer = 15;
 		}
@@ -54,7 +57,6 @@ package
 				else 
 				{ 
 					speed.x = 0;
-					trace("POP");
 					
 					if (speed.x > 0)
 					{
@@ -87,6 +89,8 @@ package
 		
 		public function destroy():void
 		{
+			sfxDogDie.play(.5);
+			Game.infoText.score += 10;
 			FP.world.remove(this);
 		}
 		

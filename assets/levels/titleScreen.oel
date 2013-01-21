@@ -1,56 +1,57 @@
-<level width="320" height="240">
+<level width="320" height="480">
   <walls exportMode="GridRectangles">
-    <rect x="0" y="24" w="40" h="1" />
+    <rect x="0" y="56" w="40" h="1" />
   </walls>
-  <entities>
-    <playerStart id="0" x="32" y="160" angle="0" />
-  </entities>
+  <entities />
   <tiles tileset="tileKit" exportMode="XML">
-    <tile x="0" y="1" id="204" />
-    <tile x="0" y="2" id="216" />
-    <tile x="0" y="6" id="52" />
-    <tile x="0" y="7" id="64" />
-    <tile x="1" y="1" id="205" />
-    <tile x="1" y="2" id="217" />
-    <tile x="1" y="6" id="52" />
-    <tile x="1" y="7" id="64" />
-    <tile x="2" y="1" id="206" />
-    <tile x="2" y="2" id="218" />
-    <tile x="2" y="6" id="52" />
-    <tile x="2" y="7" id="64" />
-    <tile x="3" y="1" id="207" />
-    <tile x="3" y="2" id="219" />
-    <tile x="3" y="6" id="52" />
-    <tile x="3" y="7" id="64" />
-    <tile x="4" y="1" id="208" />
-    <tile x="4" y="2" id="220" />
-    <tile x="4" y="6" id="52" />
-    <tile x="4" y="7" id="64" />
-    <tile x="5" y="1" id="209" />
-    <tile x="5" y="2" id="221" />
-    <tile x="5" y="6" id="52" />
-    <tile x="5" y="7" id="64" />
-    <tile x="6" y="1" id="204" />
-    <tile x="6" y="2" id="216" />
-    <tile x="6" y="3" id="161" />
-    <tile x="6" y="4" id="173" />
-    <tile x="6" y="5" id="185" />
-    <tile x="6" y="6" id="52" />
-    <tile x="6" y="7" id="64" />
-    <tile x="7" y="3" id="162" />
-    <tile x="7" y="4" id="174" />
-    <tile x="7" y="5" id="186" />
-    <tile x="7" y="6" id="52" />
-    <tile x="7" y="7" id="64" />
-    <tile x="8" y="3" id="163" />
-    <tile x="8" y="4" id="175" />
-    <tile x="8" y="5" id="187" />
-    <tile x="8" y="6" id="52" />
-    <tile x="8" y="7" id="64" />
-    <tile x="9" y="6" id="52" />
-    <tile x="9" y="7" id="64" />
+    <tile x="0" y="9" id="204" />
+    <tile x="0" y="14" id="52" />
+    <tile x="1" y="14" id="52" />
+    <tile x="2" y="14" id="52" />
+    <tile x="3" y="14" id="52" />
+    <tile x="4" y="14" id="52" />
+    <tile x="5" y="8" id="209" />
+    <tile x="5" y="9" id="205" />
+    <tile x="5" y="10" id="217" />
+    <tile x="5" y="14" id="52" />
+    <tile x="6" y="9" id="206" />
+    <tile x="6" y="10" id="218" />
+    <tile x="6" y="14" id="52" />
+    <tile x="7" y="9" id="207" />
+    <tile x="7" y="10" id="219" />
+    <tile x="7" y="12" id="173" />
+    <tile x="7" y="13" id="185" />
+    <tile x="7" y="14" id="52" />
+    <tile x="8" y="9" id="208" />
+    <tile x="8" y="10" id="220" />
+    <tile x="8" y="12" id="174" />
+    <tile x="8" y="13" id="186" />
+    <tile x="8" y="14" id="52" />
+    <tile x="9" y="1" id="209" />
+    <tile x="9" y="8" id="209" />
+    <tile x="9" y="9" id="209" />
+    <tile x="9" y="10" id="221" />
+    <tile x="9" y="12" id="175" />
+    <tile x="9" y="13" id="187" />
+    <tile x="9" y="14" id="52" />
   </tiles>
   <foregroundTiles tileset="tileKit" exportMode="XML">
-    <tile x="8" y="5" id="194" />
+    <tile x="1" y="8" id="205" />
+    <tile x="1" y="9" id="217" />
+    <tile x="2" y="8" id="206" />
+    <tile x="2" y="9" id="218" />
+    <tile x="3" y="8" id="207" />
+    <tile x="3" y="9" id="219" />
+    <tile x="4" y="8" id="208" />
+    <tile x="4" y="9" id="220" />
+    <tile x="5" y="3" id="209" />
+    <tile x="5" y="8" id="209" />
+    <tile x="5" y="9" id="221" />
+    <tile x="6" y="8" id="209" />
+    <tile x="7" y="10" id="222" />
+    <tile x="7" y="11" id="161" />
+    <tile x="8" y="11" id="162" />
+    <tile x="9" y="11" id="163" />
+    <tile x="9" y="13" id="194" />
   </foregroundTiles>
 </level>

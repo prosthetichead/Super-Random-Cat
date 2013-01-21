@@ -2,16 +2,24 @@ package
 {
 
 	
+	import net.flashpunk.Entity;
+	import net.flashpunk.graphics.Text;
+	import net.flashpunk.Sfx;
 	import net.flashpunk.World;
 	import net.flashpunk.FP; 
 	import flash.utils.ByteArray;
 	import net.flashpunk.utils.Input;
+	import net.flashpunk.graphics.Graphiclist;
 	
 	
 	public class Game extends World
 	{	
-		
+		[Embed(source = "../assets/music/Pinball_Spring.mp3")]  public static var mp3Music:Class;
+		[Embed(source="../assets/music/die.mp3")] public static var mp3MusicDie:Class;
 		[Embed(source = "../assets/levels/level1.oel", mimeType = "application/octet-stream")] public var lvlLevel1:Class;
+		
+		public static var music:Sfx = new Sfx(mp3Music);
+		public static var musicDie:Sfx = new Sfx(mp3MusicDie);
 		
 		public var levels:Array = new Array(lvlLevel1);
 		public var currentLevel:int = 0; //level 0  is first level
@@ -19,28 +27,33 @@ package
 		private var tiles:Tiles = new Tiles(2560, 2560, 99);
 		private var tilesForeground:Tiles = new Tiles(2560, 2560, 98);
 		private var collisionGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8);
-		private var player:Player;
+		
 		private var pauseScreen:PauseScreen = new PauseScreen();
+		
+		public static var player:Player;
 		public static var pause:Boolean = false;
 		public static var reset:Boolean = false;
 		public static var gameOver:Boolean = false;
 		public static var levelHeight:Number = 2560;
 		public static var levelWidth:Number = 2560;
-		public static var livesInfo:LivesInfo = new LivesInfo();
+		
+		
+		public static var infoText:InfoText = new InfoText();
 		
 		public function Game() 
 		{	
 			pauseScreen.visible = false;
-			add(pauseScreen);
 			LoadLevel();
 		}
 		
-
+		
 		
 		public function LoadLevel():void 
 		{
-			if (currentLevel != 0)
-				add(livesInfo);
+			music.loop(.1);
+
+			add(infoText);
+			add(pauseScreen);
 			
 			//get the xml file of the level
 			var o:XML;
@@ -86,6 +99,10 @@ package
 			{
 				add(new BlueBizDog(o.@x, o.@y));
 			}
+			for each (o in levelXML.entities[0].redBizDog)
+			{
+				add(new RedBizDog(o.@x, o.@y));
+			}
 			
 			
 			
@@ -93,6 +110,10 @@ package
 
 		override public function update():void
 		{
+			//textLives.text = "LIVES: " + livesRemaining;
+			//textScore.text = "SCORE: " + currentScore;
+			
+			
 			if (!pause)
 			{
 				pauseScreen.visible = false;
@@ -111,7 +132,10 @@ package
 			if (Input.pressed("pause"))
 				Game.pause = !Game.pause;
 			if (reset)
+			{
 				resetLevel();
+
+			}
 			if (gameOver)
 				lose();
 		}
@@ -119,6 +143,7 @@ package
 		public function resetLevel():void
 		{
 			reset = false;
+
 			removeAll()
 			LoadLevel();
 		}
