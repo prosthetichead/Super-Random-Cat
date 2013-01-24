@@ -39,7 +39,7 @@ package
 		
 		override public function update():void
 		{
-			onGround = (collide("collisionGrid", x, y + 1) || (collide("platform", x, y + 1) && !collide("platform", x, y)));
+			onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)));
 			speed.y += gravity;
 			
 			if (sprBizDog.currentAnim == "walkLeft")
@@ -70,7 +70,9 @@ package
 				}
 			}
 			
-			if (!collide("collisionGrid", x + 10, y+5) || !collide("collisionGrid", x - 10, y+5))
+			
+			if ((!collide("PlatformGrid", x + 10 , y + halfHeight) || !collide("PlatformGrid", x -10 , y + halfHeight)) && (!collide("collisionGrid", x + 10, y+5) || !collide("collisionGrid", x - 10, y+5)))
+			//if ((!collide("collisionGrid", x + 10, y+5) || !collide("collisionGrid", x - 10, y+5)) && (!collide("PlatformGrid", x + 10, y+1) || !collide("PlatformGrid", x - 10, y+1)) )
 			{
 					//y += FP.sign(speed.y);
 					x -= FP.sign(speed.x);

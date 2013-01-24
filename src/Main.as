@@ -12,7 +12,7 @@ package
 		public function Main()
 		{
 			super(320, 240, 60, false);
-			FP.world = new Game;
+			FP.world = new TitleScreen;
 			FP.screen.color = 0x3399cc;
 			FP.screen.scale = 2;
 			

@@ -3,17 +3,23 @@ package
 	
 	import net.flashpunk.Entity
 	import net.flashpunk.FP;
-	//import net.flashpunk.graphics.Text;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
+	import net.flashpunk.graphics.Graphiclist;
 	
 	public class SignPost extends Entity
 	{
 	
 		[Embed(source="../assets/gfx/signPost.png")] private var imgSignPost:Class;
+		[Embed(source = "../assets/gfx/upx.png")] private var imgUpX:Class;
+			
 		private var sprSignPost:Image;
 		public var message:String;
-		public var displayHelp:DisplayHelp;
+		//public var displayHelp:DisplayHelp;
+		private var sprUpX:Image;
+		
+		private var gList:Graphiclist = new Graphiclist();
+		
 		private var textBoxArea:TextBoxArea;
 		
 		public function SignPost(x:int, y:int, message:String = "text here") 
@@ -21,8 +27,18 @@ package
 			this.x = x;
 			this.y = y;
 			this.message = message;
-			sprSignPost = new Image(imgSignPost);	
-			graphic = sprSignPost;
+			sprSignPost = new Image(imgSignPost);
+			sprUpX = new Image(imgUpX);
+			sprUpX.x = -1;
+			sprUpX.y = -10;
+			
+			sprUpX.visible = false;
+			sprUpX.alpha = 0;
+			
+			gList.add(sprUpX);
+			gList.add(sprSignPost);
+			
+			addGraphic(gList);
 			setHitbox(32, 32, 0, 0);
 			type = "signPost";	
 			layer = 95;
@@ -30,17 +46,25 @@ package
 		
 		override public function update():void 
 		{	
-			if (collide("player", x, y) && !displayHelp)
+			if (collide("player", x, y) && !sprUpX.visible)
 			{
-				displayHelp = new DisplayHelp(x, y - 10);
-				FP.world.add(displayHelp);
+				sprUpX.visible = true
 			}
-			else if (!collide("player", x, y) && displayHelp)
+			else if (!collide("player", x, y) && sprUpX.visible)
 			{
-				displayHelp.distory();
-				displayHelp = null;
+				sprUpX.alpha -= .04;
+				if (sprUpX.alpha <= 0 )
+					sprUpX.visible = false;
 			}
-				
+			if (sprUpX.alpha < 1 && sprUpX.visible)
+			{
+				sprUpX.alpha += .01;
+			}	
+
+			
+			
+			
+			
 			if (Input.check("up") && Input.pressed("sprint")  &&  collide("player", x, y) && !textBoxArea)
 			{
 				textBoxArea = new TextBoxArea(x, y, message);

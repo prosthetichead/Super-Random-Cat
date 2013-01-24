@@ -8,11 +8,11 @@ package
 	{
 		private var gridCollision:Grid;
 		
-		public function CollisionGrid(gridW:int, gridH:int, tileW:int, tileH:int) 
+		public function CollisionGrid(gridW:int, gridH:int, tileW:int, tileH:int, type:String = "collisionGrid") 
 		{
 		gridCollision = new Grid(gridW, gridH, tileW, tileH, x, y);
 		
-		type = "collisionGrid";
+		this.type = type;
 		//setHitbox(16, 16);
 		
 		collidable = true;

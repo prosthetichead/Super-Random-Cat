@@ -10,7 +10,6 @@ package
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
-	//import net.flashpunk.utils.Draw;
 	import net.flashpunk.utils.Input
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.Sfx;
@@ -122,7 +121,7 @@ package
 			
 			if (Input.check("down") && Input.check("jump"))
 			{
-				if (collide("platform", x, y + 1) && !collide("collisionGrid", x, y + 1)) { y++; }
+				if (collide("PlatformGrid", x, y + 1) && !collide("collisionGrid", x, y + 1)) { y++; }
 			}
 			else if (Input.pressed("jump") && onGround) { speed.y = - jump; }
 			
@@ -155,10 +154,10 @@ package
 		{
 			var redBizDog:RedBizDog = collide("RedBizDog", x, y) as RedBizDog;
 			var blueBizDog:BlueBizDog = collide("BlueBizDog", x, y) as BlueBizDog;
-			
 			if (redBizDog && !onGround)
 			{
-				if (redBizDog.top < this.bottom)
+				
+				if (redBizDog.top > top)
 				{
 					speed.y = - 5;
 					redBizDog.destroy();
@@ -168,7 +167,7 @@ package
 			}
 			else if (blueBizDog && !onGround)
 			{
-				if (blueBizDog.top < this.bottom)
+				if (blueBizDog.top > top)
 				{
 					speed.y = - 5;
 					blueBizDog.destroy();
@@ -202,7 +201,7 @@ package
 				//vertical collisions
 				for (i = 0; i < Math.abs(speed.y); i += 1)
 				{
-					if (!collide("collisionGrid", x, y + FP.sign(speed.y)) && !(collide("platform", x, y + 1) && speed.y > 0 && !collide("platform", x, y)))
+					if (!collide("collisionGrid", x, y + FP.sign(speed.y)) && !(collide("PlatformGrid", x, y + 1) && speed.y > 0 && !collide("PlatformGrid", x, y)))
 					{
 						y += FP.sign(speed.y);
 					}
@@ -239,9 +238,12 @@ package
 				else 
 				{
 					die();	
-				}
-				
+				}	
 			}
+			
+			
+			clampHorizontal(0, Game.levelWidth, 0);
+			
 		}
 		
 		
@@ -249,7 +251,7 @@ package
 		override public function update():void
 		{
 			//ground check
- 			onGround = (collide("collisionGrid", x, y + 1) || (collide("platform", x, y + 1) && !collide("platform", x, y)) || dead);
+ 			onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)) || dead);
 			if (!onGround)
 				landed = false;
 			if (onGround && !landed)

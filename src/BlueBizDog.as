@@ -30,7 +30,8 @@ package
 			this.x = x;
 			this.y = y;
 			graphic = sprBlueBizDog;
-			setHitbox(16, 32, 0, 0);
+			setHitbox(16, 27, 0, 0);
+			setOrigin(0, -5);
 			type = "BlueBizDog";
 			
 			layer = 15;
@@ -38,7 +39,7 @@ package
 		
 		override public function update():void
 		{
-			onGround = (collide("collisionGrid", x, y + 1) || (collide("platform", x, y + 1) && !collide("platform", x, y)));
+			onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)));
 			speed.y += gravity;
 			
 			if (sprBlueBizDog.currentAnim == "walkLeft")
@@ -70,7 +71,7 @@ package
 			}
 			for (i = 0; i < Math.abs(speed.y); i += 1)
 			{
-				if (!collide("collisionGrid", x, y + FP.sign(speed.y)) && !(collide("platform", x, y + 1) && speed.y > 0 && !collide("platform", x, y)))
+				if (!collide("collisionGrid", x, y + FP.sign(speed.y)) && !collide("PlatformGrid", x, y + FP.sign(speed.y))) 
 				{
 					y += FP.sign(speed.y);
 				}

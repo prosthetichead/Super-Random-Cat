@@ -27,6 +27,7 @@ package
 		private var tiles:Tiles = new Tiles(2560, 2560, 99);
 		private var tilesForeground:Tiles = new Tiles(2560, 2560, 98);
 		private var collisionGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8);
+		private var platformGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8,"PlatformGrid");
 		
 		private var pauseScreen:PauseScreen = new PauseScreen();
 		
@@ -68,9 +69,9 @@ package
 			{				
 				collisionGrid.addSolidRect(o.@x, o.@y, o.@w, o.@h);
 			}
-			for each (o in levelXML.entities[0].platform)
+			for each (o in levelXML.platforms[0].rect)
 			{				
-				add(new Platform(o.@x, o.@y));
+				platformGrid.addSolidRect(o.@x, o.@y, o.@w, o.@h);
 			}
 			for each (o in levelXML.entities[0].catFood)
 			{
@@ -87,6 +88,8 @@ package
 			add(tiles);
 			add(tilesForeground);
 			add(collisionGrid);
+			add(platformGrid);
+			
 			for each (o in levelXML.entities[0].signPost)
 			{
 				add(new SignPost(o.@x, o.@y, o.@signInfo));
@@ -152,6 +155,7 @@ package
 		{
 			gameOver = false;
 			removeAll();
+			FP.world = new TitleScreen;
 		}
 	}
 }
