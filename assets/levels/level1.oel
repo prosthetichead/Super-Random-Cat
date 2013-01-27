@@ -11,7 +11,8 @@
     <rect x="131" y="45" w="1" h="1" />
     <rect x="140" y="40" w="16" h="1" />
     <rect x="164" y="36" w="16" h="1" />
-    <rect x="192" y="36" w="28" h="1" />
+    <rect x="201" y="52" w="4" h="1" />
+    <rect x="203" y="36" w="21" h="1" />
   </walls>
   <platforms exportMode="GridRectangles">
     <rect x="24" y="40" w="12" h="1" />
@@ -21,8 +22,11 @@
     <rect x="32" y="44" w="8" h="1" />
     <rect x="40" y="56" w="20" h="1" />
     <rect x="52" y="32" w="24" h="1" />
-    <rect x="204" y="32" w="16" h="1" />
+    <rect x="192" y="36" w="11" h="1" />
+    <rect x="204" y="32" w="20" h="1" />
+    <rect x="205" y="52" w="19" h="1" />
     <rect x="208" y="28" w="8" h="1" />
+    <rect x="228" y="48" w="4" h="1" />
   </platforms>
   <entities>
     <playerStart id="0" x="16" y="352" angle="0" />
@@ -52,17 +56,66 @@
     <catFood id="62" x="560" y="240" />
     <catFood id="63" x="576" y="240" />
     <catFood id="64" x="592" y="240" />
-    <blueBizDog id="1" x="160" y="352" />
     <signPost id="2" x="544" y="352" signInfo="To dash press and hold The Z key." />
     <redBizDog id="3" x="1648" y="224" />
     <redBizDog id="4" x="1696" y="192" />
     <redBizDog id="5" x="1408" y="256" />
     <redBizDog id="6" x="1168" y="288" />
-    <redBizDog id="7" x="1552" y="256" />
     <redBizDog id="8" x="1744" y="224" />
-    <redBizDog id="9" x="1600" y="256" />
     <redBizDog id="10" x="288" y="256" />
     <redBizDog id="11" x="224" y="288" />
+    <catFood id="1" x="256" y="336" />
+    <catFood id="12" x="272" y="336" />
+    <catFood id="13" x="288" y="336" />
+    <catFood id="14" x="304" y="336" />
+    <catFood id="23" x="256" y="272" />
+    <catFood id="25" x="272" y="272" />
+    <catFood id="26" x="288" y="272" />
+    <catFood id="27" x="304" y="272" />
+    <catFood id="28" x="192" y="304" />
+    <catFood id="29" x="208" y="304" />
+    <catFood id="30" x="224" y="304" />
+    <catFood id="31" x="240" y="304" />
+    <catFood id="32" x="256" y="304" />
+    <catFood id="33" x="272" y="304" />
+    <catFood id="39" x="336" y="368" />
+    <catFood id="40" x="320" y="368" />
+    <catFood id="41" x="304" y="368" />
+    <catFood id="42" x="288" y="368" />
+    <catFood id="43" x="480" y="368" />
+    <catFood id="44" x="496" y="368" />
+    <catFood id="45" x="784" y="368" />
+    <catFood id="46" x="800" y="368" />
+    <catFood id="47" x="816" y="368" />
+    <catFood id="48" x="976" y="336" />
+    <catFood id="49" x="992" y="336" />
+    <catFood id="50" x="1008" y="336" />
+    <catFood id="51" x="960" y="336" />
+    <catFood id="52" x="768" y="368" />
+    <catFood id="65" x="1152" y="304" />
+    <catFood id="66" x="1168" y="304" />
+    <catFood id="67" x="1184" y="304" />
+    <catFood id="68" x="1200" y="304" />
+    <catFood id="69" x="1344" y="272" />
+    <catFood id="70" x="1360" y="272" />
+    <catFood id="71" x="1376" y="272" />
+    <catFood id="72" x="1392" y="272" />
+    <bounceBlock id="9" x="1568" y="416" />
+    <catFood id="73" x="1600" y="400" />
+    <catFood id="74" x="1616" y="400" />
+    <catFood id="75" x="1632" y="400" />
+    <catFood id="76" x="1648" y="400" />
+    <catFood id="77" x="1680" y="400" />
+    <catFood id="78" x="1648" y="400" />
+    <catFood id="79" x="1664" y="400" />
+    <catFood id="80" x="1696" y="400" />
+    <catFood id="81" x="1728" y="400" />
+    <catFood id="82" x="1712" y="400" />
+    <catFood id="83" x="1744" y="400" />
+    <catFood id="84" x="1760" y="400" />
+    <catFood id="85" x="1776" y="400" />
+    <catFood id="86" x="1824" y="368" />
+    <catFood id="88" x="1840" y="368" />
   </entities>
   <tiles tileset="tileKit" exportMode="XML">
     <tile x="0" y="12" id="3" />
@@ -197,17 +250,56 @@
     <tile x="48" y="13" id="14" />
     <tile x="48" y="14" id="14" />
     <tile x="49" y="9" id="3" />
+    <tile x="49" y="10" id="15" />
+    <tile x="49" y="11" id="15" />
+    <tile x="49" y="12" id="15" />
+    <tile x="49" y="13" id="15" />
+    <tile x="49" y="14" id="15" />
     <tile x="50" y="9" id="3" />
+    <tile x="50" y="10" id="15" />
+    <tile x="50" y="11" id="15" />
+    <tile x="50" y="12" id="15" />
+    <tile x="50" y="13" id="88" />
+    <tile x="50" y="14" id="15" />
     <tile x="51" y="8" id="48" />
     <tile x="51" y="9" id="3" />
+    <tile x="51" y="10" id="15" />
+    <tile x="51" y="11" id="15" />
+    <tile x="51" y="12" id="15" />
+    <tile x="51" y="13" id="100" />
+    <tile x="51" y="14" id="15" />
     <tile x="52" y="7" id="48" />
     <tile x="52" y="8" id="49" />
     <tile x="52" y="9" id="3" />
+    <tile x="52" y="10" id="15" />
+    <tile x="52" y="11" id="15" />
+    <tile x="52" y="12" id="15" />
+    <tile x="52" y="13" id="100" />
+    <tile x="52" y="14" id="15" />
     <tile x="53" y="7" id="50" />
     <tile x="53" y="8" id="49" />
     <tile x="53" y="9" id="3" />
-    <tile x="54" y="8" id="50" />
+    <tile x="53" y="10" id="15" />
+    <tile x="53" y="11" id="15" />
+    <tile x="53" y="12" id="15" />
+    <tile x="53" y="13" id="100" />
+    <tile x="53" y="14" id="15" />
+    <tile x="54" y="8" id="49" />
     <tile x="54" y="9" id="3" />
+    <tile x="54" y="10" id="15" />
+    <tile x="54" y="11" id="15" />
+    <tile x="54" y="12" id="15" />
+    <tile x="54" y="13" id="100" />
+    <tile x="54" y="14" id="15" />
+    <tile x="55" y="8" id="50" />
+    <tile x="55" y="9" id="11" />
+    <tile x="55" y="10" id="17" />
+    <tile x="55" y="11" id="17" />
+    <tile x="55" y="12" id="17" />
+    <tile x="55" y="13" id="89" />
+    <tile x="55" y="14" id="17" />
+    <tile x="56" y="9" id="8" />
+    <tile x="57" y="12" id="87" />
   </tiles>
   <foregroundTiles tileset="tileKit" exportMode="XML">
     <tile x="6" y="10" id="48" />

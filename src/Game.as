@@ -56,6 +56,8 @@ package
 			add(infoText);
 			add(pauseScreen);
 			
+			
+			
 			//get the xml file of the level
 			var o:XML;
 			var file:ByteArray = new levels[currentLevel];
@@ -106,8 +108,10 @@ package
 			{
 				add(new RedBizDog(o.@x, o.@y));
 			}
-			
-			
+			for each (o in levelXML.entities[0].bounceBlock)
+			{
+				add(new BounceBlock(o.@x, o.@y));
+			}
 			
 		}
 
@@ -155,6 +159,8 @@ package
 		{
 			gameOver = false;
 			removeAll();
+			infoText.lives = 3;
+			infoText.score = 0;
 			FP.world = new TitleScreen;
 		}
 	}

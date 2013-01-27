@@ -154,31 +154,46 @@ package
 		{
 			var redBizDog:RedBizDog = collide("RedBizDog", x, y) as RedBizDog;
 			var blueBizDog:BlueBizDog = collide("BlueBizDog", x, y) as BlueBizDog;
-			if (redBizDog && !onGround)
+			if (redBizDog)
 			{
-				
-				if (redBizDog.top > top)
+				if (!redBizDog.dead)
 				{
-					speed.y = - 5;
-					redBizDog.destroy();
+					if (!onGround)
+					{				
+						if (redBizDog.top > top)
+						{
+							speed.y = - 5;
+							redBizDog.killed();
+						}
+						else
+						{		
+						die();
+						}
+					}
+					else 
+						die();
 				}
-				else
-					die();
 			}
-			else if (blueBizDog && !onGround)
+			else if (blueBizDog)
 			{
-				if (blueBizDog.top > top)
-				{
-					speed.y = - 5;
-					blueBizDog.destroy();
+				if (!blueBizDog.dead)
+				{	
+					if (!onGround)
+					{
+						if (blueBizDog.top > top)
+						{
+							speed.y = - 5;
+							blueBizDog.killed();
+						}
+						else
+						{
+							die();
+						}	
+					}
+					else
+						die();
 				}
-				else
-					die();
 			}
-			else if (redBizDog || blueBizDog)
-			{
-				die()
-			}	
 		}
 		
 		private function movement(colide:Boolean = true):void 

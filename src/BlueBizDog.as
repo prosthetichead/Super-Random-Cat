@@ -20,6 +20,7 @@ package
 		private var gravity:Number = 0.2;
 		private var acceleration:Number = 0.1;
 		private var  maxspeed:Number = .9;
+		public var dead = false;
 		
 		
 		public function BlueBizDog(x:int, y:int) 
@@ -42,11 +43,24 @@ package
 			onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)));
 			speed.y += gravity;
 			
-			if (sprBlueBizDog.currentAnim == "walkLeft")
+			speed.y += gravity;
+			if (dead)
+			{
+				if (sprBlueBizDog.angle < 180)
+				{
+					sprBlueBizDog.angle += 20;
+				}
+				speed.x = 0;
+				sprBlueBizDog.centerOrigin();
+				y += 5;
+				
+			}	
+			
+			if (sprBlueBizDog.currentAnim == "walkLeft"  && !dead)
 			{
 				speed.x -= acceleration;
 			}
-			else if  (sprBlueBizDog.currentAnim == "walkRight")
+			else if  (sprBlueBizDog.currentAnim == "walkRight"  && !dead)
 			{
 				speed.x += acceleration;
 			}	
@@ -88,10 +102,15 @@ package
 				destroy();
 		}
 		
-		public function destroy():void
+		public function killed():void 
 		{
 			sfxDogDie.play(.5);
 			Game.infoText.score += 10;
+			dead = true;
+		}
+		
+		public function destroy():void
+		{
 			FP.world.remove(this);
 		}
 		

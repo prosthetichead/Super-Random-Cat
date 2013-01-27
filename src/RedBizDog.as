@@ -22,6 +22,7 @@ package
 		private var acceleration:Number = 0.1;
 		private var  maxspeed:Number = .9;
 		
+		public var dead:Boolean = false;
 		
 		public function RedBizDog(x:int, y:int) 
 		{
@@ -39,14 +40,25 @@ package
 		
 		override public function update():void
 		{
-			onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)));
+			//onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)));
 			speed.y += gravity;
-			
-			if (sprBizDog.currentAnim == "walkLeft")
+			if (dead)
+			{
+				if (sprBizDog.angle < 180)
+				{
+					sprBizDog.angle += 20;
+				}
+				speed.x = 0;
+				sprBizDog.centerOrigin();
+				y += 5;
+				
+			}	
+				
+			if (sprBizDog.currentAnim == "walkLeft" && !dead)
 			{
 				speed.x -= acceleration;
 			}
-			else if  (sprBizDog.currentAnim == "walkRight")
+			else if  (sprBizDog.currentAnim == "walkRight" && !dead)
 			{
 				speed.x += acceleration;
 			}	
@@ -100,10 +112,15 @@ package
 				destroy();
 		}
 		
-		public function destroy():void
+		public function killed():void 
 		{
 			sfxDogDie.play(.5);
 			Game.infoText.score += 10;
+			dead = true;
+		}
+		
+		public function destroy():void
+		{
 			FP.world.remove(this);
 		}
 		
