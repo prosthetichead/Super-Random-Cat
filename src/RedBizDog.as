@@ -115,7 +115,7 @@ package
 		public function killed():void 
 		{
 			sfxDogDie.play(.5);
-			Game.infoText.score += 10;
+			Game.infoText.score += 10 * Game.player.bounceCount;
 			dead = true;
 		}
 		

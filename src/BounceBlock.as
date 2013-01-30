@@ -4,6 +4,7 @@ package
 	import net.flashpunk.graphics.Image;
 		import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.FP;
+import net.flashpunk.Sfx;
 import net.flashpunk.tweens.misc.NumTween;
 import net.flashpunk.utils.Ease;
 	import net.flashpunk.tweens.motion.LinearMotion;
@@ -14,9 +15,14 @@ import net.flashpunk.utils.Ease;
 	public class BounceBlock extends Entity
 	{
 		[Embed(source = "../assets/gfx/bounceBlock.png")] private const imgBounceBlock:Class;
+		[Embed(source = "../assets/sfx/littleBoing.mp3")] private const mp3LittleBoing:Class;
+		[Embed(source="../assets/sfx/bigBoing.mp3")]  private const mp3BigBoing:Class;
+		
 		private var sprBounceBlock:Spritemap = new Spritemap(imgBounceBlock, 32, 32);
-		public var bounceTween:NumTween = new NumTween();
-		var bouncing:Boolean = false;
+		private var sfxLittleBoing:Sfx = new Sfx(mp3LittleBoing);
+		private var sfxBigBoing:Sfx = new Sfx(mp3BigBoing);
+		
+		private var bouncing:Boolean = false;
 		public var orgX:int;
 		public var orgY:int;
 		
@@ -39,9 +45,6 @@ import net.flashpunk.utils.Ease;
 			
 			collidable = true;
 			
-			addTween(bounceTween);
-			bounceTween.tween(y, orgY, 1, Ease.expoOut);
-			
 		}
 		
 		public function tweenComplete():void 
@@ -60,10 +63,15 @@ import net.flashpunk.utils.Ease;
 				}
 				else
 				{
+					sfxLittleBoing.play(.4);
 					Game.player.speed.y = -5;
+					
 				}	
-				if (y > orgY + 5 && Input.pressed("jump"))
+				if (y > orgY + 10 && Input.pressed("jump"))
+				{
 					Game.player.speed.y = -8;
+					sfxBigBoing.play(.4);
+				}
 			}
 			else if (collideWith(Game.player,x, y + 5))
 			{

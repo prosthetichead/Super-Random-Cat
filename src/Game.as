@@ -17,17 +17,17 @@ package
 		[Embed(source = "../assets/music/Pinball_Spring.mp3")]  public static var mp3Music:Class;
 		[Embed(source="../assets/music/die.mp3")] public static var mp3MusicDie:Class;
 		[Embed(source = "../assets/levels/level1.oel", mimeType = "application/octet-stream")] public var lvlLevel1:Class;
+		[Embed(source = "../assets/levels/level2.oel", mimeType = "application/octet-stream")] public var lvlLevel2:Class;
 		
 		public static var music:Sfx = new Sfx(mp3Music);
 		public static var musicDie:Sfx = new Sfx(mp3MusicDie);
 		
-		public var levels:Array = new Array(lvlLevel1);
-		public var currentLevel:int = 0; //level 0  is first level
+		public var levels:Array = new Array(lvlLevel1, lvlLevel2);
+		
 		
 		private var tiles:Tiles = new Tiles(2560, 2560, 99);
 		private var tilesForeground:Tiles = new Tiles(2560, 2560, 98);
-		private var collisionGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8);
-		private var platformGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8,"PlatformGrid");
+		
 		
 		private var pauseScreen:PauseScreen = new PauseScreen();
 		
@@ -37,6 +37,7 @@ package
 		public static var gameOver:Boolean = false;
 		public static var levelHeight:Number = 2560;
 		public static var levelWidth:Number = 2560;
+		public static var currentLevel:int = 0; //level 0  is first level
 		
 		
 		public static var infoText:InfoText = new InfoText();
@@ -56,7 +57,8 @@ package
 			add(infoText);
 			add(pauseScreen);
 			
-			
+			var collisionGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8);
+			var platformGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8,"PlatformGrid");
 			
 			//get the xml file of the level
 			var o:XML;
@@ -96,6 +98,12 @@ package
 			{
 				add(new SignPost(o.@x, o.@y, o.@signInfo));
 			}
+			
+			for each (o in levelXML.entities[0].playerFinish)
+			{
+				add(new Teleport(o.@x, o.@y));
+			}
+			
 			for each (o in levelXML.entities[0].playerStart)
 			{				
 				add(player = new Player(o.@x, o.@y));
@@ -112,6 +120,7 @@ package
 			{
 				add(new BounceBlock(o.@x, o.@y));
 			}
+
 			
 		}
 

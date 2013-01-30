@@ -10,15 +10,20 @@ package
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.Sfx;
+	
 	 
 	public class Player extends Entity
 	{
 		[Embed(source = "../assets/gfx/player.png")] private const PLAYER_SPRITE:Class;
-		[Embed(source = "../assets/sfx/jumpLand.mp3")] private const mp3JumpLand:Class;
+		[Embed(source = "../assets/sfx/extraLife.mp3")] private const mp3ExtraLife:Class;
+		
+		
 		public var sprPlayer:Spritemap = new Spritemap(PLAYER_SPRITE, 32, 32);
+		public var text1UP:Text = new Text("1UP", 0, 0);
 		
 		
 		public var speed:Point = new Point(0, 0);
@@ -33,18 +38,19 @@ package
 		public var dead:Boolean = false;
 		private var landed:Boolean = true;
 		
+		public var bounceCount:int = 0;
+		public var frozen:Boolean = false;
 		
-		public static var score:int;
-		public static var lives:int;
-		
-		public var sfxJumpLand:Sfx = new Sfx(mp3JumpLand);
+		public var sfxExtraLife:Sfx = new Sfx(mp3ExtraLife);
 		
 		public function Player(x:int, y:int) 
 		{
 			sprPlayer.add("standLeft", [8,9,10,11], 5, true);
 			sprPlayer.add("walkLeft", [0, 1, 2, 3], 10, true);
 			sprPlayer.add("standRight", [12,13,14,15], 5, true);
-			sprPlayer.add("walkRight", [4, 5, 6,7], 10, true);
+			sprPlayer.add("walkRight", [4, 5, 6, 7], 10, true);
+			sprPlayer.add("sit", [27], 0, false);
+			sprPlayer.add("teleportIn", [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27], 15, false);
 			
 			Input.define("up", Key.UP);
 			Input.define("left", Key.LEFT);
@@ -55,7 +61,7 @@ package
 			Input.define("pause", Key.SPACE, Key.ENTER);
 			
 			graphic = sprPlayer;
-			sprPlayer.play("standRight");
+			sprPlayer.play("teleportIn");
 			
 			this.x = x;
 			this.y = y;
@@ -66,13 +72,11 @@ package
 			
 			
 			layer = 10;
+			frozen = true;
 		}
 		
 		private function die():void 
 		{
-			
-			
-			
 			Game.music.stop();
 			Game.musicDie.play(.1);
 			acceleration = 5;
@@ -150,6 +154,21 @@ package
 			}
 		}
 		
+		private function checkExtraLife():void 
+		{
+			bounceCount += 1
+			if (bounceCount > 5)
+			{
+				GiveExtraLife();
+			}
+		}
+		
+		public function GiveExtraLife():void 
+		{
+			sfxExtraLife.play(.3);
+			Game.infoText.lives += 1;
+		}
+		
 		private function checkEnemyCollisons():void 
 		{
 			var redBizDog:RedBizDog = collide("RedBizDog", x, y) as RedBizDog;
@@ -163,6 +182,7 @@ package
 						if (redBizDog.top > top)
 						{
 							speed.y = - 5;
+							checkExtraLife();
 							redBizDog.killed();
 						}
 						else
@@ -183,6 +203,7 @@ package
 						if (blueBizDog.top > top)
 						{
 							speed.y = - 5;
+							checkExtraLife();
 							blueBizDog.killed();
 						}
 						else
@@ -194,6 +215,8 @@ package
 						die();
 				}
 			}
+			
+
 		}
 		
 		private function movement(colide:Boolean = true):void 
@@ -261,37 +284,51 @@ package
 			
 		}
 		
-		
+		public function finishLevel():void 
+		{
+			//sprPlayer.play("sit");
+			//frozen = true;
+			frozen = true;
+			sprPlayer.visible = false;
+		}
 		
 		override public function update():void
 		{
-			//ground check
- 			onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)) || dead);
-			if (!onGround)
-				landed = false;
-			if (onGround && !landed)
+			if (frozen && sprPlayer.currentAnim == "teleportIn" && sprPlayer.complete)
+				frozen = false;
+			
+			if (!frozen)
 			{
-				sfxJumpLand.play();
-				landed = true;
-			}	
-			//gravity
-			speed.y += gravity;
-
-			if (!dead)
-			{
-				checkEnemyCollisons();					
-				checkForInput();
-				movement();
+				
+				//ground check
+				onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)) || dead);
+				if (!onGround)
+					landed = false;
+				if (onGround && !landed)
+				{
+					bounceCount = 0;
+					landed = true;
+				}	
+				//gravity
+				speed.y += gravity;
+				
+				if (!dead)
+				{
+					checkEnemyCollisons();					
+					checkForInput();
+					movement();
+				}
+				else
+				{
+					movement(false);
+				}
 			}
 			else
 			{
-				movement(false);
-			}
-
-			if (collide("finish", x, y)) {
 				
-				//Game.finished = true;
+					//Game.reset = true;
 			}
+			
 			
 			//camera			
 

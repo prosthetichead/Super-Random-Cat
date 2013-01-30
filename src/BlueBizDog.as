@@ -20,7 +20,7 @@ package
 		private var gravity:Number = 0.2;
 		private var acceleration:Number = 0.1;
 		private var  maxspeed:Number = .9;
-		public var dead = false;
+		public var dead:Boolean = false;
 		
 		
 		public function BlueBizDog(x:int, y:int) 
@@ -105,7 +105,7 @@ package
 		public function killed():void 
 		{
 			sfxDogDie.play(.5);
-			Game.infoText.score += 10;
+			Game.infoText.score += 10 * Game.player.bounceCount;
 			dead = true;
 		}
 		
