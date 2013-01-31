@@ -23,7 +23,7 @@ package
 		
 		
 		public var sprPlayer:Spritemap = new Spritemap(PLAYER_SPRITE, 32, 32);
-		public var text1UP:Text = new Text("1UP", 0, 0);
+		//public var text1UP:Text = new Text("1UP", 0, 0);
 		
 		
 		public var speed:Point = new Point(0, 0);
