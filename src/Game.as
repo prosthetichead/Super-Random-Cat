@@ -141,8 +141,10 @@ package
 			}
 			
 			camera.x += Math.round(((player.x - FP.width / 4) - FP.camera.x) / 10);
-			camera.y += Math.round(((player.y - FP.height / 4) - FP.camera.y) / 10);
+			if (!player.dead)
+				camera.y += Math.round(((player.y - FP.height / 4) - FP.camera.y) / 10);
 			
+				
 			FP.clampInRect(camera, 0, 0,  levelWidth - FP.width,  levelHeight - FP.height);
 			
 			if (Input.pressed("pause"))

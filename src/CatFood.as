@@ -51,7 +51,7 @@ package
 		{
 			if (collideWith(Game.player, x, y) && !Game.player.dead && !collected)
 			{
-				sfxCollect.play(.5);
+				sfxCollect.play(.2);
 				Game.infoText.plusScore(1);
 				collected = true;
 				sprCatFood.visible = false;

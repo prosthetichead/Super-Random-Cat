@@ -26,6 +26,7 @@
     <rect x="200" y="36" w="4" h="1" />
     <rect x="208" y="32" w="20" h="1" />
     <rect x="220" y="40" w="16" h="1" />
+    <rect x="240" y="36" w="4" h="1" />
     <rect x="252" y="36" w="32" h="1" />
   </platforms>
   <tiles tileset="tileKit" exportMode="XML">
@@ -494,5 +495,12 @@
     <catFood id="102" x="1520" y="288" />
     <catFood id="103" x="1552" y="320" />
     <blueBizDog id="104" x="544" y="320" />
+    <blueBizDog id="105" x="832" y="256" />
+    <redBizDog id="106" x="1216" y="256" />
+    <redBizDog id="107" x="2192" y="256" />
+    <redBizDog id="108" x="1456" y="256" />
+    <redBizDog id="109" x="992" y="256" />
+    <redBizDog id="110" x="2384" y="352" />
+    <redBizDog id="111" x="1872" y="288" />
   </entities>
 </level>

@@ -71,7 +71,7 @@ package
 					x += FP.sign(speed.x); 
 				else 
 				{ 
-					speed.x = 0;
+					//speed.x = 0;
 					
 					if (speed.x > 0)
 					{

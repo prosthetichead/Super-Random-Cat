@@ -181,7 +181,7 @@ package
 					{				
 						if (redBizDog.top > top)
 						{
-							speed.y = - 5;
+							speed.y = -4;
 							checkExtraLife();
 							redBizDog.killed();
 						}
@@ -202,7 +202,7 @@ package
 					{
 						if (blueBizDog.top > top)
 						{
-							speed.y = - 5;
+							speed.y = -4;
 							checkExtraLife();
 							blueBizDog.killed();
 						}

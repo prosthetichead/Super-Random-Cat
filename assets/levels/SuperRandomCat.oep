@@ -198,6 +198,7 @@
       </ImageDefinition>
       <ValueDefinitions>
         <ValueDefinition xsi:type="StringValueDefinition" Name="signInfo" Default="Info is writen here!&#xD;&#xA;To dash press and hold Z key." MaxChars="-1" MultiLine="true" />
+        <ValueDefinition xsi:type="BoolValueDefinition" Name="AutoRead" Default="false" />
       </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>
