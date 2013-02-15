@@ -18,8 +18,8 @@ package
 		public var speed:Point = new Point(0, 0);
 		private var onGround:Boolean;
 		private var gravity:Number = 0.2;
-		private var acceleration:Number = 0.1;
-		private var  maxspeed:Number = .9;
+		private var acceleration:Number = 0.6;
+		private var  maxspeed:Number = .6;
 		public var dead:Boolean = false;
 		
 		
@@ -31,8 +31,8 @@ package
 			this.x = x;
 			this.y = y;
 			graphic = sprBlueBizDog;
-			setHitbox(16, 27, 0, 0);
-			setOrigin(0, -5);
+			setHitbox(5, 25, -5, -6);
+			
 			type = "BlueBizDog";
 			
 			layer = 15;
@@ -40,6 +40,8 @@ package
 		
 		override public function update():void
 		{
+			//MAX SPEEDS
+
 			onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)));
 			speed.y += gravity;
 			
@@ -56,6 +58,7 @@ package
 				
 			}	
 			
+			
 			if (sprBlueBizDog.currentAnim == "walkLeft"  && !dead)
 			{
 				speed.x -= acceleration;
@@ -65,14 +68,18 @@ package
 				speed.x += acceleration;
 			}	
 		
+			if (Math.abs(speed.x) > maxspeed)
+			{ 
+				speed.x = FP.sign(speed.x) * maxspeed;
+				
+			}
+			
 			for (var i:int = 0; i < Math.abs(speed.x); i += 1)
 			{
 				if (!collide("collisionGrid", x + FP.sign(speed.x), y))
-					x += FP.sign(speed.x); 
+					x += speed.x; 
 				else 
 				{ 
-					//speed.x = 0;
-					
 					if (speed.x > 0)
 					{
 						sprBlueBizDog.play("walkLeft");
@@ -92,11 +99,7 @@ package
 				else { speed.y = 0; }
 			}
 			
-			//MAX SPEEDS
-			if (Math.abs(speed.x) > maxspeed)
-			{ 
-				speed.x = FP.sign(speed.x) * maxspeed;
-			}
+
 			
 			if (y > Game.levelHeight + 40)
 				destroy();

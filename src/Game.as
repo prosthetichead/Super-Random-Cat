@@ -18,15 +18,14 @@ package
 		[Embed(source="../assets/music/die.mp3")] public static var mp3MusicDie:Class;
 		[Embed(source = "../assets/levels/level1.oel", mimeType = "application/octet-stream")] public var lvlLevel1:Class;
 		[Embed(source = "../assets/levels/level2.oel", mimeType = "application/octet-stream")] public var lvlLevel2:Class;
+		[Embed(source = "../assets/levels/level3.oel", mimeType = "application/octet-stream")] public var lvlLevel3:Class;
 		
 		public static var music:Sfx = new Sfx(mp3Music);
 		public static var musicDie:Sfx = new Sfx(mp3MusicDie);
 		
-		public var levels:Array = new Array(lvlLevel1, lvlLevel2);
+		public var levels:Array = new Array(lvlLevel1, lvlLevel2, lvlLevel3);
 		
 		
-		private var tiles:Tiles = new Tiles(2560, 2560, 99);
-		private var tilesForeground:Tiles = new Tiles(2560, 2560, 98);
 		
 		
 		private var pauseScreen:PauseScreen = new PauseScreen();
@@ -58,7 +57,12 @@ package
 			add(pauseScreen);
 			
 			var collisionGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8);
-			var platformGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8,"PlatformGrid");
+			var platformGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8, "PlatformGrid");
+			var parallax1:Tiles = new Tiles(2560, 2560, 102, .05);
+			var parallax2:Tiles = new Tiles(2560, 2560, 101, .2);
+			var parallax3:Tiles = new Tiles(2560, 2560, 100,.5);
+			var tiles:Tiles = new Tiles(2560, 2560, 99);
+			var tilesForeground:Tiles = new Tiles(2560, 2560, 98);
 			
 			//get the xml file of the level
 			var o:XML;
@@ -81,6 +85,18 @@ package
 			{
 				add(new CatFood(o.@x, o.@y));
 			}
+			for each (o in levelXML.parallax1[0].tile)
+			{				
+				parallax1.AddTile(o.@x, o.@y, o.@id);
+			}
+			for each (o in levelXML.parallax2[0].tile)
+			{				
+				parallax2.AddTile(o.@x, o.@y, o.@id);
+			}
+			for each (o in levelXML.parallax3[0].tile)
+			{				
+				parallax3.AddTile(o.@x, o.@y, o.@id);
+			}
 			for each (o in levelXML.tiles[0].tile)
 			{				
 				tiles.AddTile(o.@x, o.@y, o.@id);
@@ -93,6 +109,10 @@ package
 			add(tilesForeground);
 			add(collisionGrid);
 			add(platformGrid);
+			add(parallax1);
+			add(parallax2);
+			add(parallax3);
+			
 			
 			for each (o in levelXML.entities[0].signPost)
 			{
@@ -161,7 +181,7 @@ package
 		public function resetLevel():void
 		{
 			reset = false;
-
+			
 			removeAll()
 			LoadLevel();
 		}

@@ -1,6 +1,7 @@
 <level width="1280" height="2560">
   <walls exportMode="GridRectangles">
     <rect x="0" y="12" w="12" h="1" />
+    <rect x="0" y="92" w="24" h="4" />
     <rect x="3" y="43" w="22" h="1" />
     <rect x="3" y="44" w="1" h="44" />
     <rect x="11" y="13" w="1" h="24" />
@@ -18,15 +19,19 @@
     <rect x="40" y="56" w="72" h="1" />
     <rect x="40" y="57" w="1" h="7" />
     <rect x="41" y="63" w="71" h="1" />
+    <rect x="48" y="32" w="4" h="4" />
     <rect x="50" y="6" w="47" h="2" />
     <rect x="50" y="8" w="2" h="18" />
+    <rect x="64" y="32" w="4" h="4" />
     <rect x="67" y="37" w="1" h="9" />
     <rect x="76" y="36" w="21" h="1" />
     <rect x="76" y="37" w="1" h="11" />
     <rect x="77" y="47" w="35" h="1" />
+    <rect x="84" y="32" w="13" h="4" />
+    <rect x="88" y="28" w="9" h="4" />
+    <rect x="92" y="24" w="20" h="1" />
+    <rect x="92" y="25" w="5" h="3" />
     <rect x="96" y="8" w="1" h="8" />
-    <rect x="96" y="24" w="16" h="1" />
-    <rect x="96" y="25" w="1" h="11" />
     <rect x="97" y="15" w="25" h="1" />
     <rect x="111" y="25" w="1" h="22" />
     <rect x="111" y="57" w="1" h="6" />
@@ -34,6 +39,50 @@
     <rect x="152" y="12" w="8" h="1" />
   </walls>
   <platforms exportMode="GridRectangles" />
+  <parallax1 tileset="tileKit" exportMode="XML" />
+  <parallax2 tileset="tileKit" exportMode="XML">
+    <tile x="0" y="2" id="159" />
+    <tile x="0" y="3" id="171" />
+    <tile x="1" y="2" id="159" />
+    <tile x="1" y="3" id="171" />
+    <tile x="2" y="0" id="192" />
+    <tile x="2" y="1" id="204" />
+    <tile x="2" y="2" id="159" />
+    <tile x="2" y="3" id="171" />
+    <tile x="3" y="0" id="192" />
+    <tile x="3" y="1" id="204" />
+    <tile x="3" y="2" id="159" />
+    <tile x="3" y="3" id="171" />
+    <tile x="4" y="0" id="193" />
+    <tile x="4" y="1" id="205" />
+    <tile x="4" y="2" id="159" />
+    <tile x="4" y="3" id="171" />
+    <tile x="5" y="0" id="194" />
+    <tile x="5" y="1" id="206" />
+    <tile x="5" y="2" id="159" />
+    <tile x="5" y="3" id="171" />
+    <tile x="6" y="0" id="195" />
+    <tile x="6" y="1" id="207" />
+    <tile x="6" y="2" id="159" />
+    <tile x="6" y="3" id="171" />
+    <tile x="7" y="0" id="196" />
+    <tile x="7" y="1" id="208" />
+    <tile x="7" y="2" id="159" />
+    <tile x="7" y="3" id="171" />
+    <tile x="8" y="0" id="197" />
+    <tile x="8" y="1" id="209" />
+    <tile x="8" y="2" id="159" />
+    <tile x="8" y="3" id="171" />
+    <tile x="9" y="1" id="213" />
+    <tile x="9" y="2" id="159" />
+    <tile x="9" y="3" id="171" />
+    <tile x="10" y="1" id="213" />
+    <tile x="10" y="2" id="159" />
+    <tile x="10" y="3" id="171" />
+    <tile x="11" y="1" id="213" />
+    <tile x="11" y="3" id="171" />
+  </parallax2>
+  <parallax3 tileset="tileKit" exportMode="XML" />
   <tiles tileset="tileKit" exportMode="XML">
     <tile x="0" y="10" id="140" />
     <tile x="0" y="11" id="140" />
@@ -47,6 +96,7 @@
     <tile x="0" y="19" id="140" />
     <tile x="0" y="20" id="140" />
     <tile x="0" y="21" id="140" />
+    <tile x="1" y="5" id="140" />
     <tile x="1" y="10" id="140" />
     <tile x="1" y="11" id="140" />
     <tile x="1" y="12" id="140" />
@@ -59,7 +109,6 @@
     <tile x="1" y="19" id="140" />
     <tile x="1" y="20" id="140" />
     <tile x="1" y="21" id="140" />
-    <tile x="2" y="3" id="128" />
     <tile x="2" y="4" id="140" />
     <tile x="2" y="5" id="140" />
     <tile x="2" y="6" id="140" />
@@ -116,7 +165,6 @@
     <tile x="4" y="19" id="140" />
     <tile x="4" y="20" id="140" />
     <tile x="4" y="21" id="140" />
-    <tile x="5" y="3" id="128" />
     <tile x="5" y="4" id="140" />
     <tile x="5" y="5" id="140" />
     <tile x="5" y="6" id="140" />
@@ -135,7 +183,6 @@
     <tile x="5" y="19" id="140" />
     <tile x="5" y="20" id="140" />
     <tile x="5" y="21" id="140" />
-    <tile x="6" y="3" id="166" />
     <tile x="6" y="6" id="140" />
     <tile x="6" y="7" id="140" />
     <tile x="6" y="8" id="140" />
@@ -149,7 +196,6 @@
     <tile x="6" y="16" id="140" />
     <tile x="6" y="17" id="140" />
     <tile x="6" y="18" id="140" />
-    <tile x="7" y="3" id="166" />
     <tile x="7" y="6" id="140" />
     <tile x="7" y="7" id="140" />
     <tile x="7" y="8" id="140" />
@@ -549,6 +595,7 @@
     <tile x="0" y="19" id="143" />
     <tile x="0" y="20" id="143" />
     <tile x="0" y="21" id="143" />
+    <tile x="0" y="23" id="265" />
     <tile x="1" y="3" id="130" />
     <tile x="1" y="4" id="142" />
     <tile x="1" y="5" id="142" />
@@ -557,6 +604,7 @@
     <tile x="1" y="8" id="142" />
     <tile x="1" y="9" id="142" />
     <tile x="1" y="10" id="154" />
+    <tile x="1" y="23" id="277" />
     <tile x="2" y="3" id="131" />
     <tile x="2" y="4" id="143" />
     <tile x="2" y="5" id="143" />
@@ -565,10 +613,13 @@
     <tile x="2" y="8" id="143" />
     <tile x="2" y="9" id="142" />
     <tile x="2" y="10" id="154" />
+    <tile x="2" y="23" id="277" />
     <tile x="3" y="9" id="166" />
     <tile x="3" y="10" id="154" />
+    <tile x="3" y="23" id="277" />
     <tile x="4" y="9" id="166" />
     <tile x="4" y="10" id="154" />
+    <tile x="4" y="23" id="277" />
     <tile x="5" y="3" id="165" />
     <tile x="5" y="4" id="141" />
     <tile x="5" y="5" id="141" />
@@ -579,6 +630,8 @@
     <tile x="5" y="19" id="141" />
     <tile x="5" y="20" id="141" />
     <tile x="5" y="21" id="141" />
+    <tile x="5" y="23" id="266" />
+    <tile x="6" y="3" id="166" />
     <tile x="6" y="4" id="142" />
     <tile x="6" y="5" id="142" />
     <tile x="6" y="6" id="154" />
@@ -593,6 +646,7 @@
     <tile x="6" y="19" id="142" />
     <tile x="6" y="20" id="142" />
     <tile x="6" y="21" id="142" />
+    <tile x="7" y="3" id="166" />
     <tile x="7" y="4" id="142" />
     <tile x="7" y="5" id="142" />
     <tile x="7" y="6" id="154" />
@@ -668,6 +722,7 @@
     <tile x="12" y="4" id="143" />
     <tile x="12" y="5" id="143" />
     <tile x="12" y="6" id="155" />
+    <tile x="12" y="8" id="264" />
     <tile x="12" y="9" id="166" />
     <tile x="12" y="10" id="142" />
     <tile x="12" y="11" id="154" />
@@ -679,6 +734,7 @@
     <tile x="12" y="21" id="142" />
     <tile x="13" y="0" id="142" />
     <tile x="13" y="1" id="154" />
+    <tile x="13" y="5" id="265" />
     <tile x="13" y="9" id="166" />
     <tile x="13" y="10" id="142" />
     <tile x="13" y="11" id="154" />
@@ -690,6 +746,7 @@
     <tile x="13" y="21" id="142" />
     <tile x="14" y="0" id="142" />
     <tile x="14" y="1" id="154" />
+    <tile x="14" y="5" id="277" />
     <tile x="14" y="9" id="166" />
     <tile x="14" y="10" id="142" />
     <tile x="14" y="11" id="154" />
@@ -701,6 +758,7 @@
     <tile x="14" y="21" id="142" />
     <tile x="15" y="0" id="142" />
     <tile x="15" y="1" id="154" />
+    <tile x="15" y="5" id="277" />
     <tile x="15" y="9" id="166" />
     <tile x="15" y="10" id="142" />
     <tile x="15" y="11" id="154" />
@@ -712,6 +770,8 @@
     <tile x="15" y="21" id="142" />
     <tile x="16" y="0" id="142" />
     <tile x="16" y="1" id="154" />
+    <tile x="16" y="5" id="277" />
+    <tile x="16" y="8" id="264" />
     <tile x="16" y="9" id="167" />
     <tile x="16" y="10" id="143" />
     <tile x="16" y="11" id="155" />
@@ -723,6 +783,7 @@
     <tile x="16" y="21" id="142" />
     <tile x="17" y="0" id="142" />
     <tile x="17" y="1" id="154" />
+    <tile x="17" y="5" id="277" />
     <tile x="17" y="14" id="166" />
     <tile x="17" y="15" id="154" />
     <tile x="17" y="18" id="166" />
@@ -731,6 +792,7 @@
     <tile x="17" y="21" id="142" />
     <tile x="18" y="0" id="142" />
     <tile x="18" y="1" id="154" />
+    <tile x="18" y="5" id="277" />
     <tile x="18" y="14" id="166" />
     <tile x="18" y="15" id="154" />
     <tile x="18" y="18" id="166" />
@@ -739,6 +801,7 @@
     <tile x="18" y="21" id="142" />
     <tile x="19" y="0" id="142" />
     <tile x="19" y="1" id="154" />
+    <tile x="19" y="5" id="277" />
     <tile x="19" y="9" id="165" />
     <tile x="19" y="10" id="141" />
     <tile x="19" y="11" id="153" />
@@ -750,6 +813,7 @@
     <tile x="19" y="21" id="142" />
     <tile x="20" y="0" id="142" />
     <tile x="20" y="1" id="154" />
+    <tile x="20" y="5" id="266" />
     <tile x="20" y="9" id="166" />
     <tile x="20" y="10" id="142" />
     <tile x="20" y="11" id="154" />
@@ -761,6 +825,7 @@
     <tile x="20" y="21" id="142" />
     <tile x="21" y="0" id="142" />
     <tile x="21" y="1" id="154" />
+    <tile x="21" y="8" id="264" />
     <tile x="21" y="9" id="166" />
     <tile x="21" y="10" id="142" />
     <tile x="21" y="11" id="154" />
@@ -772,6 +837,8 @@
     <tile x="21" y="21" id="142" />
     <tile x="22" y="0" id="142" />
     <tile x="22" y="1" id="154" />
+    <tile x="22" y="7" id="264" />
+    <tile x="22" y="8" id="264" />
     <tile x="22" y="9" id="166" />
     <tile x="22" y="10" id="142" />
     <tile x="22" y="11" id="154" />
@@ -783,6 +850,9 @@
     <tile x="22" y="21" id="142" />
     <tile x="23" y="0" id="142" />
     <tile x="23" y="1" id="154" />
+    <tile x="23" y="6" id="264" />
+    <tile x="23" y="7" id="264" />
+    <tile x="23" y="8" id="264" />
     <tile x="23" y="9" id="166" />
     <tile x="23" y="10" id="142" />
     <tile x="23" y="11" id="154" />
@@ -1096,7 +1166,32 @@
   <entities>
     <playerStart id="0" x="16" y="64" angle="0" />
     <redBizDog id="1" x="240" y="64" />
-    <blueBizDog id="2" x="192" y="64" />
     <bounceBlock id="3" x="32" y="576" />
+    <signPost id="4" x="176" y="544" signInfo="This Level is not complete" AutoRead="False" />
+    <playerFinish id="5" x="32" y="704" />
+    <catFood id="2" x="64" y="80" />
+    <catFood id="6" x="80" y="80" />
+    <catFood id="7" x="96" y="64" />
+    <catFood id="8" x="112" y="64" />
+    <catFood id="9" x="128" y="80" />
+    <catFood id="10" x="128" y="96" />
+    <catFood id="11" x="128" y="112" />
+    <catFood id="12" x="128" y="128" />
+    <catFood id="13" x="128" y="144" />
+    <catFood id="14" x="112" y="160" />
+    <catFood id="15" x="96" y="176" />
+    <catFood id="16" x="96" y="192" />
+    <catFood id="17" x="96" y="208" />
+    <catFood id="18" x="112" y="224" />
+    <catFood id="19" x="128" y="240" />
+    <catFood id="20" x="128" y="256" />
+    <catFood id="21" x="128" y="272" />
+    <catFood id="22" x="176" y="272" />
+    <catFood id="23" x="224" y="272" />
+    <catFood id="24" x="272" y="272" />
+    <catFood id="25" x="320" y="272" />
+    <redBizDog id="26" x="464" y="128" />
+    <blueBizDog id="27" x="448" y="256" />
+    <redBizDog id="28" x="864" y="160" />
   </entities>
 </level>

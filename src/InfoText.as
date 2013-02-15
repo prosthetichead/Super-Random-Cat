@@ -62,8 +62,8 @@ package
 				var tempText:Text = glistInfoText.children[i] as Text;
 				if (tempText.alpha != 0)
 				{
-					tempText.y += -.2;
-					tempText.alpha += -.05;
+					tempText.y += -.1;
+					tempText.alpha += -.02;
 				}
 				else
 					glistInfoText.removeAt(i);

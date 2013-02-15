@@ -27,13 +27,20 @@ package
 		
 		
 		public var speed:Point = new Point(0, 0);
+		
+		public var baseAcceleration:Number = 0.3;
+		public var baseMaxSpeed:Number = 1;
+		public var sprintMaxSpeed:Number =2;
+		public var sprintAcceleration:Number = 2;
+		
+		
 		public var acceleration:Number = 0.5;
-		public var friction:Number = 0.5;
+		public var friction:Number = .3;
 		public var gravity:Number = 0.2;
-		public var jump:Number = 3.5;
-		public var maxspeed:Number = 2;
+		public var jump:Number = 4;	
+		public var maxspeed:Number = 0;
 		public var maxFall:Number = 3.6;
-		public var airControl:Number = .5; //Percentage of control when airborne. Should be between 0 and 1 (inclusive).
+		public var airControl:Number = .55; //Percentage of control when airborne. Should be between 0 and 1 (inclusive).
 		public var onGround:Boolean = false;
 		public var dead:Boolean = false;
 		private var landed:Boolean = true;
@@ -90,6 +97,7 @@ package
 		
 		private function checkForInput():void 
 		{
+			//trace("speed.x = " + speed.x);
 			if(sprPlayer.currentAnim == "walkLeft" || sprPlayer.currentAnim == "standLeft")
 			{
 				setHitbox(18, 19, -4, -13);
@@ -99,16 +107,20 @@ package
 				setHitbox(18, 19, -10, -13);
 			}
 		
-			if (Input.check("sprint"))
+			if (onGround)
 			{
-				maxspeed = 4;
-				acceleration = 2;
+				if (Input.check("sprint"))
+				{
+					maxspeed = sprintMaxSpeed;
+					acceleration = sprintAcceleration;
+				}
+				else
+				{
+					maxspeed = baseMaxSpeed;
+					acceleration = baseAcceleration;
+				}
 			}
-			else
-			{
-				maxspeed = 2;
-				acceleration = .5;
-			}
+
 			
 			if (Input.check("left"))
 			{
@@ -157,7 +169,7 @@ package
 		private function checkExtraLife():void 
 		{
 			bounceCount += 1
-			if (bounceCount > 5)
+			if (bounceCount > 3)
 			{
 				GiveExtraLife();
 			}

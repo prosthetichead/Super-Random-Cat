@@ -20,7 +20,7 @@ package
 		private var onGround:Boolean;
 		private var gravity:Number = 0.2;
 		private var acceleration:Number = 0.1;
-		private var  maxspeed:Number = .9;
+		private var  maxspeed:Number = .5;
 		
 		public var dead:Boolean = false;
 		
@@ -66,7 +66,7 @@ package
 			for (var i:int = 0; i < Math.abs(speed.x); i += 1)
 			{
 				if (!collide("collisionGrid", x + FP.sign(speed.x), y))
-					x += FP.sign(speed.x); 
+					x += speed.x; 
 				else 
 				{ 
 					//speed.x = 0;

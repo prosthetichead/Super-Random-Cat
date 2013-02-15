@@ -13,13 +13,16 @@ package
 		 
 		private var tiles:Tilemap;
 		
-		public function Tiles(width:int, height:int, layer:int) 
+		public function Tiles(width:int, height:int, layer:int, scroll:Number = 1) 
 		{
 			tiles = new Tilemap(imgTileKit, width, height, 32, 32);
 			//tiles.setRect(0, 0, 640, 680, 3);
 			
 			graphic = tiles;
 			collidable = false;
+			graphic.scrollX = scroll;
+			//graphic.scrollY = scroll;
+			
 			
 			this.layer = layer;
 		}

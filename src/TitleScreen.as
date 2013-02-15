@@ -22,6 +22,10 @@ package
 		private var sprPH2KGames:Image = new Image(imgPH2KGames);
 		private var entPH2KGames:Entity = new Entity(0, 0, sprPH2KGames);
 		
+				
+		private var parallax1:Tiles = new Tiles(2560, 2560, 102, .05);
+		private var parallax2:Tiles = new Tiles(2560, 2560, 101, .2);
+		private var parallax3:Tiles = new Tiles(2560, 2560, 100,.5);
 		private var tiles:Tiles = new Tiles(2560, 2560, 99);
 		private var tilesForeground:Tiles = new Tiles(2560, 2560, 98);
 		private var collisionGrid:CollisionGrid = new CollisionGrid(2560, 2560, 8, 8);
@@ -136,6 +140,18 @@ package
 			{
 				add(new CatFood(o.@x, o.@y));
 			}
+			for each (o in levelXML.parallax1[0].tile)
+			{				
+				parallax1.AddTile(o.@x, o.@y, o.@id);
+			}
+			for each (o in levelXML.parallax2[0].tile)
+			{				
+				parallax2.AddTile(o.@x, o.@y, o.@id);
+			}
+			for each (o in levelXML.parallax3[0].tile)
+			{				
+				parallax3.AddTile(o.@x, o.@y, o.@id);
+			}
 			for each (o in levelXML.tiles[0].tile)
 			{				
 				tiles.AddTile(o.@x, o.@y, o.@id);
@@ -147,14 +163,17 @@ package
 			add(tiles);
 			add(tilesForeground);
 			add(collisionGrid);
+			add(parallax1);
+			add(parallax2);
+			add(parallax3);
 			for each (o in levelXML.entities[0].signPost)
 			{
 				add(new SignPost(o.@x, o.@y, o.@signInfo));
 			}
-			for each (o in levelXML.entities[0].playerStart)
-			{				
+			//for each (o in levelXML.entities[0].playerStart)
+			//{				
 				//add(player = new Player(o.@x, o.@y));
-			}
+			//}
 			for each (o in levelXML.entities[0].blueBizDog)
 			{
 				add(new BlueBizDog(o.@x, o.@y));

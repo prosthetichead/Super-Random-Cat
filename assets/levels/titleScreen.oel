@@ -3,91 +3,116 @@
     <rect x="0" y="56" w="40" h="1" />
   </walls>
   <platforms exportMode="GridRectangles" />
-  <entities />
+  <parallax1 tileset="tileKit" exportMode="XML">
+    <tile x="1" y="4" id="149" />
+    <tile x="2" y="4" id="145" />
+    <tile x="2" y="10" id="156" />
+    <tile x="2" y="11" id="168" />
+    <tile x="2" y="12" id="180" />
+    <tile x="3" y="4" id="146" />
+    <tile x="3" y="10" id="157" />
+    <tile x="3" y="11" id="169" />
+    <tile x="3" y="12" id="181" />
+    <tile x="4" y="4" id="147" />
+    <tile x="4" y="10" id="158" />
+    <tile x="4" y="11" id="170" />
+    <tile x="4" y="12" id="182" />
+    <tile x="5" y="4" id="148" />
+    <tile x="6" y="4" id="149" />
+    <tile x="6" y="5" id="132" />
+    <tile x="6" y="6" id="144" />
+    <tile x="7" y="6" id="145" />
+    <tile x="8" y="6" id="146" />
+    <tile x="9" y="6" id="147" />
+  </parallax1>
+  <parallax2 tileset="tileKit" exportMode="XML">
+    <tile x="1" y="9" id="132" />
+    <tile x="5" y="12" id="210" />
+    <tile x="5" y="13" id="222" />
+    <tile x="6" y="5" id="132" />
+    <tile x="6" y="12" id="211" />
+    <tile x="6" y="13" id="223" />
+    <tile x="7" y="12" id="212" />
+    <tile x="7" y="13" id="224" />
+    <tile x="8" y="12" id="213" />
+    <tile x="8" y="13" id="225" />
+    <tile x="9" y="12" id="213" />
+  </parallax2>
+  <parallax3 tileset="tileKit" exportMode="XML">
+    <tile x="1" y="8" id="133" />
+    <tile x="1" y="11" id="192" />
+    <tile x="1" y="12" id="204" />
+    <tile x="1" y="13" id="216" />
+    <tile x="2" y="8" id="134" />
+    <tile x="2" y="11" id="193" />
+    <tile x="2" y="12" id="205" />
+    <tile x="2" y="13" id="217" />
+    <tile x="3" y="8" id="135" />
+    <tile x="3" y="11" id="194" />
+    <tile x="3" y="12" id="206" />
+    <tile x="3" y="13" id="218" />
+    <tile x="4" y="8" id="136" />
+    <tile x="4" y="11" id="195" />
+    <tile x="4" y="12" id="207" />
+    <tile x="4" y="13" id="219" />
+    <tile x="5" y="8" id="137" />
+    <tile x="5" y="10" id="133" />
+    <tile x="5" y="11" id="196" />
+    <tile x="5" y="12" id="208" />
+    <tile x="5" y="13" id="220" />
+    <tile x="6" y="10" id="134" />
+    <tile x="6" y="11" id="197" />
+    <tile x="6" y="12" id="209" />
+    <tile x="6" y="13" id="221" />
+    <tile x="7" y="10" id="135" />
+    <tile x="7" y="11" id="197" />
+    <tile x="7" y="12" id="209" />
+    <tile x="7" y="14" id="196" />
+    <tile x="8" y="10" id="136" />
+    <tile x="8" y="11" id="197" />
+    <tile x="8" y="14" id="197" />
+    <tile x="9" y="10" id="137" />
+    <tile x="9" y="11" id="192" />
+    <tile x="9" y="12" id="204" />
+    <tile x="9" y="14" id="192" />
+  </parallax3>
   <tiles tileset="tileKit" exportMode="XML">
     <tile x="0" y="9" id="204" />
-    <tile x="0" y="11" id="48" />
-    <tile x="0" y="12" id="60" />
-    <tile x="0" y="13" id="60" />
     <tile x="0" y="14" id="52" />
-    <tile x="1" y="11" id="49" />
-    <tile x="1" y="12" id="61" />
-    <tile x="1" y="13" id="61" />
+    <tile x="1" y="12" id="93" />
+    <tile x="1" y="13" id="93" />
     <tile x="1" y="14" id="52" />
-    <tile x="2" y="11" id="50" />
-    <tile x="2" y="12" id="62" />
-    <tile x="2" y="13" id="62" />
     <tile x="2" y="14" id="52" />
     <tile x="3" y="14" id="52" />
     <tile x="4" y="14" id="52" />
     <tile x="5" y="8" id="209" />
-    <tile x="5" y="9" id="205" />
-    <tile x="5" y="10" id="217" />
     <tile x="5" y="14" id="52" />
-    <tile x="6" y="9" id="206" />
-    <tile x="6" y="10" id="218" />
-    <tile x="6" y="13" id="69" />
     <tile x="6" y="14" id="52" />
-    <tile x="7" y="9" id="207" />
-    <tile x="7" y="10" id="219" />
     <tile x="7" y="12" id="173" />
     <tile x="7" y="13" id="185" />
     <tile x="7" y="14" id="52" />
-    <tile x="8" y="9" id="208" />
-    <tile x="8" y="10" id="220" />
-    <tile x="8" y="12" id="174" />
-    <tile x="8" y="13" id="186" />
     <tile x="8" y="14" id="52" />
     <tile x="9" y="1" id="209" />
     <tile x="9" y="8" id="209" />
     <tile x="9" y="9" id="209" />
-    <tile x="9" y="10" id="221" />
-    <tile x="9" y="12" id="175" />
-    <tile x="9" y="13" id="187" />
+    <tile x="9" y="13" id="93" />
     <tile x="9" y="14" id="52" />
   </tiles>
   <foregroundTiles tileset="tileKit" exportMode="XML">
     <tile x="0" y="14" id="3" />
-    <tile x="1" y="8" id="205" />
-    <tile x="1" y="9" id="217" />
-    <tile x="1" y="12" id="51" />
-    <tile x="1" y="13" id="63" />
     <tile x="1" y="14" id="3" />
-    <tile x="2" y="8" id="206" />
-    <tile x="2" y="9" id="218" />
-    <tile x="2" y="12" id="52" />
-    <tile x="2" y="13" id="64" />
     <tile x="2" y="14" id="3" />
-    <tile x="3" y="8" id="207" />
-    <tile x="3" y="9" id="219" />
-    <tile x="3" y="12" id="53" />
-    <tile x="3" y="13" id="65" />
     <tile x="3" y="14" id="3" />
-    <tile x="4" y="8" id="208" />
-    <tile x="4" y="9" id="220" />
     <tile x="4" y="14" id="3" />
     <tile x="5" y="3" id="209" />
     <tile x="5" y="8" id="209" />
-    <tile x="5" y="9" id="221" />
-    <tile x="5" y="13" id="51" />
     <tile x="5" y="14" id="3" />
     <tile x="6" y="8" id="209" />
-    <tile x="6" y="12" id="57" />
-    <tile x="6" y="13" id="53" />
     <tile x="6" y="14" id="3" />
-    <tile x="7" y="10" id="93" />
     <tile x="7" y="11" id="161" />
-    <tile x="7" y="12" id="58" />
-    <tile x="7" y="13" id="70" />
     <tile x="7" y="14" id="3" />
-    <tile x="8" y="10" id="93" />
-    <tile x="8" y="11" id="162" />
-    <tile x="8" y="12" id="58" />
-    <tile x="8" y="13" id="70" />
     <tile x="8" y="14" id="3" />
-    <tile x="9" y="10" id="93" />
-    <tile x="9" y="12" id="59" />
-    <tile x="9" y="13" id="71" />
     <tile x="9" y="14" id="3" />
   </foregroundTiles>
+  <entities />
 </level>
