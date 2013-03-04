@@ -85,6 +85,10 @@ package
 			{
 				add(new CatFood(o.@x, o.@y));
 			}
+			for each (o in levelXML.entities[0].OneUp)
+			{
+				add(new OneUPCatFood(o.@x, o.@y));
+			}
 			for each (o in levelXML.parallax1[0].tile)
 			{				
 				parallax1.AddTile(o.@x, o.@y, o.@id);
@@ -118,6 +122,7 @@ package
 			{
 				add(new SignPost(o.@x, o.@y, o.@signInfo));
 			}
+
 			
 			for each (o in levelXML.entities[0].playerFinish)
 			{
@@ -136,11 +141,18 @@ package
 			{
 				add(new RedBizDog(o.@x, o.@y));
 			}
+			for each (o in levelXML.entities[0].bombDog)
+			{
+				add(new BombDog(o.@x, o.@y));
+			}
 			for each (o in levelXML.entities[0].bounceBlock)
 			{
 				add(new BounceBlock(o.@x, o.@y));
 			}
-
+			for each (o in levelXML.entities[0].dropBlock)
+			{
+				add(new DropBlock(o.@x, o.@y, o.node.@x, o.node.@y));
+			}
 			
 		}
 
@@ -160,12 +172,43 @@ package
 				pauseScreen.visible = true;
 			}
 			
-			camera.x += Math.round(((player.x - FP.width / 4) - FP.camera.x) / 10);
-			if (!player.dead)
-				camera.y += Math.round(((player.y - FP.height / 4) - FP.camera.y) / 10);
 			
-				
-			FP.clampInRect(camera, 0, 0,  levelWidth - FP.width,  levelHeight - FP.height);
+			
+			 // Calculate the edges of the screen.
+			var marginWidth:Number = 10
+			var marginLeft:Number = camera.x + FP.width/2 - marginWidth;
+			var marginRight:Number = camera.x + FP.width/2 + marginWidth - player.width;
+
+      // Calculate how far to scroll when the player is near the edges of the screen.
+      var cameraMovement:Number = 0.0;
+      if (player.x < marginLeft)
+        cameraMovement = player.x - marginLeft;
+      else if (player.x > marginRight)
+        cameraMovement = player.x - marginRight;
+
+      // Update the camera position, but prevent scrolling off the ends of the level.
+      camera.x = camera.x + cameraMovement;
+	  			
+	  if (!player.dead)
+		camera.y += Math.round(((player.y - FP.height / 4) - FP.camera.y) / 10);
+		
+	  FP.clampInRect(camera, 0, 0,  levelWidth - FP.width,  levelHeight - FP.height);
+			
+			
+			
+			
+			
+			
+			
+			//if (player.speed.x < 0)
+				//camera.x += Math.round(((player.x - FP.width / 4) - FP.camera.x) / 10);
+			//else
+				//camera.x += Math.round(((player.x - FP.width / 4) - FP.camera.x) / 10);
+				//
+			
+			//
+				//
+			//FP.clampInRect(camera, 0, 0,  levelWidth - FP.width,  levelHeight - FP.height);
 			
 			if (Input.pressed("pause"))
 				Game.pause = !Game.pause;

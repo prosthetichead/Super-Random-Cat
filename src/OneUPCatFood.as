@@ -7,9 +7,9 @@ package
 	import net.flashpunk.graphics.Emitter;
 	import net.flashpunk.graphics.Graphiclist;
 	
-	public class CatFood extends Entity
+	public class OneUPCatFood extends Entity
 	{
-		[Embed(source = "../assets/gfx/catFood.png")] private var imgCatFood:Class;
+		[Embed(source = "../assets/gfx/1UPcatFood.png")] private var imgCatFood:Class;
 		[Embed(source = "../assets/sfx/collect.mp3")] private var mp3Collect:Class;
 		[Embed(source="../assets/gfx/sparkle.png")] private var imgSparkle:Class;
 		
@@ -22,19 +22,18 @@ package
 		private var gList:Graphiclist = new Graphiclist();
 		private var timer:Number = 0;
 		
-		public function CatFood(x:int, y:int) 
+		public function OneUPCatFood(x:int, y:int) 
 		{
 			sprCatFood = new Image(imgCatFood);
 			
 			this.x = x;
 			this.y = y;
 			setOrigin(5, 5);
-			type = "catFood";
+			type = "1UPcatFood";
 			setHitbox(10, 10);
-
 			
 			emit.newType("test", [0]);
-			emit.setAlpha("test", 1, 0);
+			//emit.setAlpha("test", 1, 0);
 			emit.setGravity("test", 5, 3);
 			emit.setMotion("test", 0, 0, 0, 360, 50, .5);
 			
@@ -56,14 +55,13 @@ package
 				Game.infoText.plusScore(1);
 				collected = true;
 				sprCatFood.visible = false;
+				Game.infoText.lives += 1;
+					
 			}
 			
 			if (collected && timer < .2)
 			{
-				
 				timer += FP.elapsed;
-				//emit.setColor("test", Math.random() * uint.MAX_VALUE, Math.random() * uint.MAX_VALUE);
-				emit.setColor("test", 0xffff66, 0xffff66);
 				emit.emit("test", 0, 0);
 			}
 				

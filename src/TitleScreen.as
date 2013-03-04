@@ -89,7 +89,7 @@ package
 				{
 					menuItem -= 1;
 				}
-				else if (Input.pressed(Key.Z) || Input.pressed(Key.X) || Input.pressed(Key.ENTER))
+				else if (Input.pressed(Key.Z) || Input.pressed(Key.X) || Input.pressed(Key.ENTER) || Input.pressed(Key.SPACE) || Input.pressed(Key.CONTROL) || Input.pressed(Key.SHIFT))
 				{
 					if (camera.y != levelHeight - FP.height)
 						camera.y = levelHeight - FP.height;

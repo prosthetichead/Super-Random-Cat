@@ -27,7 +27,9 @@ package
 		{
 			sprBlueBizDog.add("walkLeft", [0, 1, 2, 3], 10, true);
 			sprBlueBizDog.add("walkRight", [4, 5, 6, 7], 10, true);
-			sprBlueBizDog.play("walkLeft");
+			sprBlueBizDog.add("idle", [0], 10, true);
+			
+			sprBlueBizDog.play("idle");
 			this.x = x;
 			this.y = y;
 			graphic = sprBlueBizDog;
@@ -40,8 +42,19 @@ package
 		
 		override public function update():void
 		{
-			//MAX SPEEDS
-
+			if (sprBlueBizDog.currentAnim == "idle")
+			{
+				setHitbox(500, 500);
+				centerOrigin();
+			}
+			else
+				setHitbox(5, 25, -5, -6);
+				
+			if ((sprBlueBizDog.currentAnim == "idle") && ( collideWith(Game.player, x, y)))
+			{
+				setHitbox(5, 25, -5, -6);
+				sprBlueBizDog.play("walkLeft");
+			}
 			onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)));
 			speed.y += gravity;
 			

@@ -63,9 +63,9 @@ package
 			Input.define("left", Key.LEFT);
 			Input.define("right", Key.RIGHT);
 			Input.define("down", Key.DOWN);
-			Input.define("jump", Key.X);
-			Input.define("sprint", Key.Z);
-			Input.define("pause", Key.SPACE, Key.ENTER);
+			Input.define("jump", Key.X, Key.SPACE, Key.CONTROL);
+			Input.define("sprint", Key.Z, Key.SHIFT);
+			Input.define("pause", Key.P, Key.ENTER);
 			
 			graphic = sprPlayer;
 			sprPlayer.play("teleportIn");
@@ -82,7 +82,7 @@ package
 			frozen = true;
 		}
 		
-		private function die():void 
+		public function die():void 
 		{
 			Game.music.stop();
 			Game.musicDie.play(.1);
@@ -208,7 +208,7 @@ package
 			}
 			else if (blueBizDog)
 			{
-				if (!blueBizDog.dead)
+				if (!blueBizDog.dead && blueBizDog.sprBlueBizDog.currentAnim != "idle")
 				{	
 					if (!onGround)
 					{
@@ -235,6 +235,11 @@ package
 		{
 			if (colide)
 			{
+				if (collide("collisionGrid", x, y))
+				{
+					y -= 1;
+				}
+				
 				//horizontal collisions
 				for (var i:int = 0; i < Math.abs(speed.x); i += 1)
 				{
@@ -340,9 +345,6 @@ package
 				
 					//Game.reset = true;
 			}
-			
-			
-			//camera			
 
 		}
 

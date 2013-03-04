@@ -154,22 +154,7 @@
         <X>0</X>
         <Y>0</Y>
       </Origin>
-      <ImageDefinition DrawMode="Rectangle" ImagePath="" Tiled="false">
-        <RectColor A="255" R="255" G="0" B="0" />
-      </ImageDefinition>
-      <ValueDefinitions />
-      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
-    </EntityDefinition>
-    <EntityDefinition Name="platform" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
-      <Size>
-        <Width>16</Width>
-        <Height>2</Height>
-      </Size>
-      <Origin>
-        <X>0</X>
-        <Y>0</Y>
-      </Origin>
-      <ImageDefinition DrawMode="Image" ImagePath="..\gfx\platform.png" Tiled="false">
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\playerStart.png" Tiled="false">
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
       <ValueDefinitions />
@@ -184,7 +169,7 @@
         <X>0</X>
         <Y>0</Y>
       </Origin>
-      <ImageDefinition DrawMode="Image" ImagePath="..\gfx\catFood.png" Tiled="false">
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\catFood.png" Tiled="false">
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
       <ValueDefinitions />
@@ -199,7 +184,7 @@
         <X>0</X>
         <Y>0</Y>
       </Origin>
-      <ImageDefinition DrawMode="Rectangle" ImagePath="" Tiled="false">
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\finish.png" Tiled="false">
         <RectColor A="255" R="0" G="255" B="0" />
       </ImageDefinition>
       <ValueDefinitions />
@@ -214,7 +199,7 @@
         <X>0</X>
         <Y>0</Y>
       </Origin>
-      <ImageDefinition DrawMode="Image" ImagePath="..\gfx\blueBizDog.png" Tiled="false">
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\blueBizDog.png" Tiled="false">
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
       <ValueDefinitions />
@@ -229,12 +214,11 @@
         <X>0</X>
         <Y>0</Y>
       </Origin>
-      <ImageDefinition DrawMode="Image" ImagePath="..\gfx\signPost.png" Tiled="false">
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\signPost.png" Tiled="false">
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
       <ValueDefinitions>
         <ValueDefinition xsi:type="StringValueDefinition" Name="signInfo" Default="Info is writen here!&#xD;&#xA;To dash press and hold Z key." MaxChars="-1" MultiLine="true" />
-        <ValueDefinition xsi:type="BoolValueDefinition" Name="AutoRead" Default="false" />
       </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>
@@ -247,22 +231,7 @@
         <X>0</X>
         <Y>0</Y>
       </Origin>
-      <ImageDefinition DrawMode="Image" ImagePath="..\gfx\redBizDog.png" Tiled="false">
-        <RectColor A="255" R="255" G="0" B="0" />
-      </ImageDefinition>
-      <ValueDefinitions />
-      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
-    </EntityDefinition>
-    <EntityDefinition Name="smashBlock" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
-      <Size>
-        <Width>32</Width>
-        <Height>32</Height>
-      </Size>
-      <Origin>
-        <X>0</X>
-        <Y>0</Y>
-      </Origin>
-      <ImageDefinition DrawMode="Image" ImagePath="..\gfx\smashBlock.png" Tiled="false">
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\redBizDog.png" Tiled="false">
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
       <ValueDefinitions />
@@ -277,11 +246,58 @@
         <X>0</X>
         <Y>0</Y>
       </Origin>
-      <ImageDefinition DrawMode="Rectangle" ImagePath="" Tiled="false">
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\bounceBlock.png" Tiled="false">
         <RectColor A="255" R="255" G="128" B="128" />
       </ImageDefinition>
       <ValueDefinitions />
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
+    </EntityDefinition>
+    <EntityDefinition Name="bombDog" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Size>
+      <Origin>
+        <X>0</X>
+        <Y>0</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\bombDog.png" Tiled="false">
+        <RectColor A="255" R="255" G="0" B="0" />
+      </ImageDefinition>
+      <ValueDefinitions />
+      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
+    </EntityDefinition>
+    <EntityDefinition Name="OneUp" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>16</Width>
+        <Height>16</Height>
+      </Size>
+      <Origin>
+        <X>0</X>
+        <Y>0</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\1UPcatFood.png" Tiled="false">
+        <RectColor A="255" R="255" G="0" B="0" />
+      </ImageDefinition>
+      <ValueDefinitions />
+      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
+    </EntityDefinition>
+    <EntityDefinition Name="dropBlock" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>64</Width>
+        <Height>32</Height>
+      </Size>
+      <Origin>
+        <X>0</X>
+        <Y>0</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\dropBlock.png" Tiled="false">
+        <RectColor A="255" R="255" G="0" B="0" />
+      </ImageDefinition>
+      <ValueDefinitions>
+        <ValueDefinition xsi:type="FloatValueDefinition" Name="dropTime" Default="1" Min="0" Max="100" Round="0.1" />
+      </ValueDefinitions>
+      <NodesDefinition Enabled="true" Limit="1" DrawMode="Path" Ghost="true" />
     </EntityDefinition>
   </EntityDefinitions>
 </project>

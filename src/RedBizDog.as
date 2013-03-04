@@ -32,7 +32,7 @@ package
 			this.x = x;
 			this.y = y;
 			graphic = sprBizDog;
-			setHitbox(16, 32, 0, 0);
+			setHitbox(5, 25, -5, -6);
 			type = "RedBizDog";
 			
 			layer = 15;

@@ -975,8 +975,7 @@
     <redBizDog id="125" x="2240" y="256" />
     <redBizDog id="2" x="496" y="352" />
     <redBizDog id="37" x="2512" y="256" />
-    <playerFinish id="44" x="2448" y="256" />
-    <signPost id="113" x="320" y="352" signInfo="To dash press and hold the Z key." AutoRead="False" />
+    <signPost id="113" x="320" y="352" signInfo="To dash press and hold the Z key.&#xD;&#xA;If you jump while Dashing you will do a Super Jump." AutoRead="False" />
     <catFood id="114" x="1424" y="272" />
     <catFood id="115" x="1408" y="272" />
     <catFood id="116" x="1440" y="256" />
@@ -1052,5 +1051,6 @@
     <bounceBlock id="185" x="2240" y="416" />
     <redBizDog id="186" x="1616" y="224" />
     <redBizDog id="187" x="1760" y="192" />
+    <signPost id="188" x="2448" y="256" signInfo="There are no levels after this one yet.&#xD;&#xA;Thanks for testing my game!!" AutoRead="False" />
   </entities>
 </level>
