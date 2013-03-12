@@ -40,7 +40,7 @@ package
 		
 		override public function update():void
 		{
-			//onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)));
+			
 			speed.y += gravity;
 			if (dead)
 			{
@@ -110,12 +110,16 @@ package
 			
 			if (y > Game.levelHeight + 40)
 				destroy();
+				
+				
+				
+			
 		}
 		
 		public function killed():void 
 		{
 			sfxDogDie.play(.5);
-			Game.infoText.plusScore(10 * Game.player.bounceCount);
+			//Game.infoText.plusScore(10 * Game.player.bounceCount);
 			dead = true;
 		}
 		

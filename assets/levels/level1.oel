@@ -1,10 +1,7 @@
 <level width="2560" height="480">
   <walls exportMode="GridRectangles">
-    <rect x="0" y="48" w="33" h="1" />
-    <rect x="32" y="44" w="12" h="1" />
-    <rect x="32" y="45" w="1" h="3" />
-    <rect x="43" y="45" w="1" h="4" />
-    <rect x="44" y="48" w="49" h="1" />
+    <rect x="0" y="48" w="93" h="1" />
+    <rect x="32" y="44" w="12" h="4" />
     <rect x="60" y="44" w="12" h="4" />
     <rect x="92" y="44" w="5" h="1" />
     <rect x="92" y="45" w="1" h="3" />
@@ -13,6 +10,7 @@
     <rect x="100" y="36" w="28" h="1" />
     <rect x="100" y="37" w="1" h="3" />
     <rect x="136" y="36" w="20" h="1" />
+    <rect x="144" y="24" w="4" h="4" />
     <rect x="164" y="36" w="24" h="3" />
     <rect x="185" y="39" w="3" h="3" />
     <rect x="186" y="42" w="6" h="1" />
@@ -24,6 +22,7 @@
     <rect x="200" y="36" w="4" h="4" />
   </walls>
   <platforms exportMode="GridRectangles">
+    <rect x="28" y="36" w="12" h="1" />
     <rect x="208" y="32" w="20" h="1" />
     <rect x="220" y="40" w="16" h="1" />
     <rect x="240" y="36" w="4" h="1" />
@@ -808,6 +807,7 @@
     <tile x="8" y="11" id="264" />
     <tile x="9" y="11" id="264" />
     <tile x="10" y="11" id="264" />
+    <tile x="36" y="6" id="264" />
     <tile x="55" y="10" id="51" />
     <tile x="55" y="11" id="63" />
     <tile x="56" y="10" id="52" />
@@ -897,7 +897,6 @@
     <catFood id="78" x="544" y="336" />
     <catFood id="80" x="304" y="336" />
     <catFood id="81" x="320" y="336" />
-    <catFood id="85" x="384" y="368" />
     <catFood id="86" x="416" y="368" />
     <catFood id="87" x="400" y="368" />
     <catFood id="88" x="432" y="368" />
@@ -941,6 +940,15 @@
     <catFood id="118" x="2224" y="368" />
     <catFood id="119" x="2256" y="368" />
     <bombDog id="121" x="672" y="368" />
-    <signPost id="120" x="128" y="352" signInfo="Welcome To The Super Random Cat Test Levels!&#xD;&#xA;Your feedback is appreciated!&#xD;&#xA;To jump press X, Space or Ctrl.&#xD;&#xA;To dash press Z or Shift." />
+    <signPost id="120" x="128" y="352" signInfo="Welcome To The Super Random Cat Test Levels!&#xD;&#xA;Your feedback is appreciated!&#xD;&#xA;To jump press X, Space or Ctrl.&#xD;&#xA;To run press Z or Shift." />
+    <moveBlock id="85" x="160" y="368" reverse="False" speed="10">
+      <node x="176" y="272" />
+      <node x="624" y="272" />
+      <node x="624" y="368" />
+      <node x="816" y="160" />
+      <node x="816" y="224" />
+      <node x="1136" y="224" />
+      <node x="1424" y="224" />
+    </moveBlock>
   </entities>
 </level>

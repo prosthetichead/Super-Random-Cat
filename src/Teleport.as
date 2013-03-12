@@ -33,7 +33,7 @@ package
 			if (collideWith(Game.player, x, y))
 			{
 				sprTeleport.play("exit");
-				Game.player.finishLevel();
+				//Game.player.finishLevel();
 			}
 			if (sprTeleport.currentAnim == "exit" && sprTeleport.complete)
 			{

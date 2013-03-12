@@ -2,14 +2,14 @@ package
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
-		import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.FP;
-import net.flashpunk.Sfx;
-import net.flashpunk.tweens.misc.NumTween;
-import net.flashpunk.utils.Ease;
+	import net.flashpunk.Sfx;
+	import net.flashpunk.tweens.misc.NumTween;
+	import net.flashpunk.utils.Ease;
 	import net.flashpunk.tweens.motion.LinearMotion;
-		import flash.geom.Point;
-		import net.flashpunk.utils.Input;
+	import flash.geom.Point;
+	import net.flashpunk.utils.Input;
 	
 	
 	public class BounceBlock extends Entity
@@ -47,11 +47,6 @@ import net.flashpunk.utils.Ease;
 			
 		}
 		
-		public function tweenComplete():void 
-		{
-			trace("tween complete");
-		}
-		
 		override public function update():void 
 		{
 			if (collideWith(Game.player,x, y - 1))
@@ -59,17 +54,18 @@ import net.flashpunk.utils.Ease;
 				if (y < orgY + 20)
 				{
 					y = y + 1;
-					Game.player.speed.x = 0;
+					Game.player.moveBy(0, +1, "collisionGrid", true)
 				}
 				else
 				{
 					sfxLittleBoing.play(.4);
-					Game.player.speed.y = -5;
+					Game.player.ySpeed = -5;
 					
 				}	
 				if (y > orgY + 10 && Input.pressed("jump"))
 				{
-					Game.player.speed.y = -8;
+					
+					Game.player.superJump = true;
 					sfxBigBoing.play(.4);
 				}
 			}
@@ -80,11 +76,11 @@ import net.flashpunk.utils.Ease;
 			}
 			else	
 			{
-				Game.player.jump = 3.5
+				
 				if (y < orgY)
 					y = y + 1;	
 				if (y > orgY)
-					y = y - 1;				
+					y = y - 1;			
 			
 			}
 		}

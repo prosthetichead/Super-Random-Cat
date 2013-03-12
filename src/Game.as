@@ -153,6 +153,16 @@ package
 			{
 				add(new DropBlock(o.@x, o.@y, o.node.@x, o.node.@y));
 			}
+			for each (o in levelXML.entities[0].moveBlock)
+			{
+				var moveBlock:MoveBlock = new MoveBlock(o.@x, o.@y);
+				add(moveBlock);
+				for each (var node:XML in o[0].node)
+				{
+					moveBlock.addPathNode(node.@x, node.@y);
+				}
+				
+			}
 			
 		}
 

@@ -29,8 +29,8 @@ package
 			this.message = message;
 			sprSignPost = new Image(imgSignPost);
 			sprUpX = new Image(imgUpX);
-			sprUpX.x = -1;
-			sprUpX.y = -10;
+			sprUpX.x = 0;
+			sprUpX.y = -28;
 			
 			sprUpX.visible = false;
 			sprUpX.alpha = 0;
@@ -65,12 +65,12 @@ package
 			
 			
 			
-			if (Input.check("up") && Input.pressed("sprint")  &&  collide("player", x, y) && !textBoxArea)
+			if (Input.pressed("up") &&  collide("player", x, y) && !textBoxArea)
 			{
 				textBoxArea = new TextBoxArea(x, y, message);
 				FP.world.add(textBoxArea);
 			}
-			else if ((textBoxArea && Input.pressed("sprint")) || (!collide("player", x, y) && textBoxArea))
+			else if ((textBoxArea && Input.pressed("up")) || (!collide("player", x, y) && textBoxArea))
 			{
 				textBoxArea.distroy();
 				textBoxArea = null;

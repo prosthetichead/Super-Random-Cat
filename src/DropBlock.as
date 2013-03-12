@@ -20,6 +20,7 @@ package
 		private var endX:int;
 		private var endY:int;
 		private var Move:NumTween = new NumTween();
+		
 		private var pauseTime:Number = 0;
 		
 		public function DropBlock(x:int, y:int, endX:int, endY:int) 
@@ -31,27 +32,25 @@ package
 			this.endX = endX;
 			this.endY = endY + 2;
 			addGraphic(sprDropBlock);
-			
-			
+						
 			addTween(Move);
 			
 			type = "collisionGrid";
 			setHitbox(64, 32, 0, 0);
 			Move.tween(this.orgY, this.endY, 1);
-			
 		}
 		
 		override public function update():void 
 		{
-			if (collideWith(Game.player, x, y))
-				{
-					trace(Move.scale);
-					Game.player.y = Move.value - Game.player.height*2; 
-				}
+			//if (collideWith(Game.player, x, y-1))
+				//{
+					//trace(Game.player.height);
+					//Game.player.speed.y = -1
+				//}
+			//
 			
-			y = Move.value;
 			if (Move.percent == 1 && y == endY)
-				Move.tween(endY, orgY, 2, Ease.expoIn);
+				Move.tween(endY, orgY, 1, Ease.quadIn);
 			else if (Move.percent == 1 && y == orgY)
 			{
 				pauseTime += FP.elapsed;
@@ -61,6 +60,18 @@ package
 					pauseTime = 0;
 				}
 			}
+			var difranceY:int = Move.value - y;
+			moveBy(0, difranceY)
+			
+			
+			if (collideWith(Game.player, x, y-1) && !Game.player.dead) {
+				Game.player.moveBy(0, difranceY);
+			}
+			else if (collideWith(Game.player, x, y+10) && !Game.player.dead)
+			{
+				Game.player.die();
+			}
+			
 		}
 	}
 

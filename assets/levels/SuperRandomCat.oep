@@ -299,5 +299,23 @@
       </ValueDefinitions>
       <NodesDefinition Enabled="true" Limit="1" DrawMode="Path" Ghost="true" />
     </EntityDefinition>
+    <EntityDefinition Name="moveBlock" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
+      <Size>
+        <Width>96</Width>
+        <Height>16</Height>
+      </Size>
+      <Origin>
+        <X>48</X>
+        <Y>0</Y>
+      </Origin>
+      <ImageDefinition DrawMode="Image" ImagePath="levelImg\moveBlock.png" Tiled="false">
+        <RectColor A="255" R="255" G="0" B="0" />
+      </ImageDefinition>
+      <ValueDefinitions>
+        <ValueDefinition xsi:type="BoolValueDefinition" Name="reverse" Default="false" />
+        <ValueDefinition xsi:type="IntValueDefinition" Name="speed" Default="10" Min="0" Max="100" ShowSlider="false" />
+      </ValueDefinitions>
+      <NodesDefinition Enabled="true" Limit="-1" DrawMode="Path" Ghost="true" />
+    </EntityDefinition>
   </EntityDefinitions>
 </project>

@@ -23,32 +23,25 @@ package
 		
 		
 		public var sprPlayer:Spritemap = new Spritemap(PLAYER_SPRITE, 32, 32);
-		//public var text1UP:Text = new Text("1UP", 0, 0);
 		
+        private var power:Number=0.2;
+        private var sprintPower:Number=0.4;
+		private var jumpPower:Number=5;
+        private var hFriction:Number=0.90;
+        private var vFriction:Number=0.99;
+        public var xSpeed:Number=0;
+        public var ySpeed:Number=0;
+        private var gravity:Number = 0.3;
+		private var maxFallSpeed:Number = 5;
 		
-		public var speed:Point = new Point(0, 0);
-		
-		public var baseAcceleration:Number = 0.3;
-		public var baseMaxSpeed:Number = 1;
-		public var sprintMaxSpeed:Number =2;
-		public var sprintAcceleration:Number = 2;
-		
-		
-		public var acceleration:Number = 0.5;
-		public var friction:Number = .3;
-		public var gravity:Number = 0.2;
-		public var jump:Number = 4;	
-		public var maxspeed:Number = 0;
-		public var maxFall:Number = 3.6;
-		public var airControl:Number = .55; //Percentage of control when airborne. Should be between 0 and 1 (inclusive).
+        public var isJumping:Boolean=false;
+        public var doubleJump:Boolean=false;
 		public var onGround:Boolean = false;
+		public var onPlatform:Boolean = false;
+		public var superJump:Boolean = false;
+		
 		public var dead:Boolean = false;
-		private var landed:Boolean = true;
 		
-		public var bounceCount:int = 0;
-		public var frozen:Boolean = false;
-		
-		public var sfxExtraLife:Sfx = new Sfx(mp3ExtraLife);
 		
 		public function Player(x:int, y:int) 
 		{
@@ -58,6 +51,7 @@ package
 			sprPlayer.add("walkRight", [4, 5, 6, 7], 10, true);
 			sprPlayer.add("sit", [27], 0, false);
 			sprPlayer.add("teleportIn", [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27], 15, false);
+			sprPlayer.add("teleportOut", [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27], 15, false);
 			
 			Input.define("up", Key.UP);
 			Input.define("left", Key.LEFT);
@@ -73,114 +67,146 @@ package
 			this.x = x;
 			this.y = y;
 
-			setHitbox(18,19,-10, -13);
+			setHitbox(20,15, -5, -17);
 			type = "player";
 			collidable = true;
 			
 			
 			layer = 10;
-			frozen = true;
 		}
 		
-		public function die():void 
+		override public function update():void
 		{
-			Game.music.stop();
-			Game.musicDie.play(.1);
-			acceleration = 5;
-			speed.y = - 7
-			sprPlayer.angle = 90
-			sprPlayer.play("walkLeft");
-			dead = true;
 			
-		}
-		
-		
-		private function checkForInput():void 
-		{
-			//trace("speed.x = " + speed.x);
-			if(sprPlayer.currentAnim == "walkLeft" || sprPlayer.currentAnim == "standLeft")
+			
+			if (collide("collisionGrid", x, y + 1) && !dead)
 			{
-				setHitbox(18, 19, -4, -13);
+				onGround = true;
+				onPlatform = false;
+			}
+			else if (collide("PlatformGrid", x, y) && !dead)
+			{
+				onPlatform = false;
+				onGround = false;
+			}
+			else if (collide("PlatformGrid", x, y + 5) && !dead)
+			{
+				onPlatform = true;
+				onGround = true;
 			}
 			else
 			{
-				setHitbox(18, 19, -10, -13);
+				onPlatform = false;
+				onGround = false;
 			}
-		
-			if (onGround)
-			{
-				if (Input.check("sprint"))
-				{
-					maxspeed = sprintMaxSpeed;
-					acceleration = sprintAcceleration;
-				}
-				else
-				{
-					maxspeed = baseMaxSpeed;
-					acceleration = baseAcceleration;
-				}
-			}
-
 			
-			if (Input.check("left"))
+			
+            if (Input.check("left") && !dead)
 			{
 				sprPlayer.play("walkLeft");
-				if (onGround) { speed.x -= acceleration; }
-				else { speed.x -= acceleration * airControl; }
-			}
-			if (Input.check("right"))
+                if (Input.check("sprint"))
+					xSpeed -= sprintPower;
+				else
+					xSpeed -= power;				
+            }
+			else if (xSpeed < 0)
+				sprPlayer.play("standLeft");
+                
+			
+			
+            if (Input.check("right") && !dead ) 
 			{
 				sprPlayer.play("walkRight");
-				if (onGround) { speed.x += acceleration; }
-				else { speed.x += acceleration * airControl; }
-			}
+                if (Input.check("sprint"))
+					xSpeed += sprintPower;
+				else
+					xSpeed += power;	
+            }
+			else if (xSpeed > 0)
+				sprPlayer.play("standRight");
 			
-			if (Input.check("down") && Input.check("jump"))
+				
+				
+            if (Input.pressed("jump") && isJumping)
 			{
-				if (collide("PlatformGrid", x, y + 1) && !collide("collisionGrid", x, y + 1)) { y++; }
-			}
-			else if (Input.pressed("jump") && onGround) { speed.y = - jump; }
-			
-			if (!Input.check("jump") && speed.y < 0) { speed.y += gravity; }
-			
-			if ((!Input.check("left") && !Input.check("right")) || (Input.check("left") && Input.check("right")))
+                doubleJump=true;
+            }
+            if (Input.pressed("jump") && doubleJump && isJumping)
 			{
-				if (speed.x > 0) 
-				{ 
-					sprPlayer.play("standRight");
-					//For friction when in the air, leave the next line uncommented.
-					//speed.x -= friction;
-					//For no friction in the air, comment the above line and uncomment the next. (Recommended when airControl < 1)
-					if (onGround) { speed.x -= friction; }
-					if (speed.x < 0) { speed.x = 0; }
-				}
-				if (speed.x < 0) 
+                ySpeed=-jumpPower;
+                isJumping=false;
+                doubleJump=false;
+            }
+            
+			if (onGround)
+			{
+                isJumping=false;
+                if (Input.pressed("jump")) 
 				{
-					sprPlayer.play("standLeft");
-					//For friction when in the air, leave the next line uncommented.
-					//speed.x += friction;
-					//For no friction in the air, comment the above line and uncomment the next. (Recommended when airControl < 1)
-					if (onGround) { speed.x += friction; }
-					if (speed.x > 0) { speed.x = 0; }
-				}
-			}
-		}
-		
-		private function checkExtraLife():void 
-		{
-			bounceCount += 1
-			if (bounceCount > 3)
+					if (superJump)
+						ySpeed = -jumpPower * 2;
+						
+					else
+						ySpeed = -jumpPower;
+						
+                    isJumping = true;
+					superJump = false;
+					
+                }
+            } 
+			else
 			{
-				GiveExtraLife();
+                ySpeed+=gravity;
+            }
+			
+			
+            if (Math.abs(xSpeed) < 1 && !Input.check("left") && !Input.check("right"))
+			{
+                xSpeed=0;
+            }
+			
+			// apply friction to speed
+            xSpeed *= hFriction;
+            ySpeed *= vFriction;
+			
+			if (ySpeed > maxFallSpeed)
+				ySpeed = maxFallSpeed;
+			
+			//move the player
+			if (!dead && onPlatform)
+			{
+				moveBy(xSpeed, ySpeed, ["collisionGrid", "PlatformGrid"]);
+				checkEnemyCollisons();
 			}
-		}
-		
-		public function GiveExtraLife():void 
-		{
-			sfxExtraLife.play(.3);
-			Game.infoText.lives += 1;
-		}
-		
+			else if (dead)
+			{
+				moveBy(xSpeed, ySpeed);
+			}
+			else 
+			{
+				moveBy(xSpeed, ySpeed, ["collisionGrid"]);
+				checkEnemyCollisons();
+			}
+			
+			//Check if fallen off the end of the level	
+			if (y > Game.levelHeight + 50 )
+			{
+				if (dead)
+				{
+				Game.infoText.lives -= 1;
+				if (Game.infoText.lives > 0)
+					Game.reset = true;
+				else
+					Game.gameOver = true;
+				}
+				else 
+				{
+					die();	
+				}	
+			}
+				
+        }
+  
 		private function checkEnemyCollisons():void 
 		{
 			var redBizDog:RedBizDog = collide("RedBizDog", x, y) as RedBizDog;
@@ -193,8 +219,7 @@ package
 					{				
 						if (redBizDog.top > top)
 						{
-							speed.y = -4;
-							checkExtraLife();
+							ySpeed = -4;
 							redBizDog.killed();
 						}
 						else
@@ -214,8 +239,7 @@ package
 					{
 						if (blueBizDog.top > top)
 						{
-							speed.y = -4;
-							checkExtraLife();
+							ySpeed = -4;
 							blueBizDog.killed();
 						}
 						else
@@ -231,124 +255,29 @@ package
 
 		}
 		
-		private function movement(colide:Boolean = true):void 
+		public function die():void 
 		{
-			if (colide)
-			{
-				if (collide("collisionGrid", x, y))
-				{
-					y -= 1;
-				}
+			Game.music.stop();
+			Game.musicDie.play(.1);
+			ySpeed -= 8
+			sprPlayer.angle = 90
+			sprPlayer.play("walkLeft");
+			dead = true;
+		}
+		override public function moveCollideX(e:Entity):Boolean 
+		{
+			
+			xSpeed = 0;
+		
+			return true;
+        }
+       override public function moveCollideY(e:Entity):Boolean
+	   {
+			
+		   ySpeed = 0;
 				
-				//horizontal collisions
-				for (var i:int = 0; i < Math.abs(speed.x); i += 1)
-				{
-					if (!collide("collisionGrid", x + FP.sign(speed.x), y)) 
-					{ 
-						x += FP.sign(speed.x); 
-					} 
-					else 
-					{ 
-						if (speed.x > 0) { sprPlayer.play("standRight"); } else { sprPlayer.play("standLeft"); }
-							speed.x = 0; 
-					}
-				}
-				//vertical collisions
-				for (i = 0; i < Math.abs(speed.y); i += 1)
-				{
-					if (!collide("collisionGrid", x, y + FP.sign(speed.y)) && !(collide("PlatformGrid", x, y + 1) && speed.y > 0 && !collide("PlatformGrid", x, y)))
-					{
-						y += FP.sign(speed.y);
-					}
-					else
-					{ 
-						
-						speed.y = 0; 
-					}
-				}
-				
-				if (Math.abs(speed.x) > maxspeed) { speed.x = FP.sign(speed.x) * maxspeed; }
-				if (speed.y > maxFall) { speed.y = maxFall; }
-			}
-			else
-			{
-				for (var i:int = 0; i < Math.abs(speed.y); i += 1)
-					y += FP.sign(speed.y);
-					
-				for (i = 0; i < Math.abs(speed.x); i += 1)
-					x += FP.sign(speed.x);
-			}
-			
-			
-			if (y > Game.levelHeight + 5 )
-			{
-				if (dead)
-				{
-				Game.infoText.lives -= 1;
-				if (Game.infoText.lives > 0)
-					Game.reset = true;
-				else
-					Game.gameOver = true;
-				}
-				else 
-				{
-					die();	
-				}	
-			}
-			
-			
-			clampHorizontal(0, Game.levelWidth, 0);
-			
+			return true;
 		}
 		
-		public function finishLevel():void 
-		{
-			//sprPlayer.play("sit");
-			//frozen = true;
-			frozen = true;
-			sprPlayer.visible = false;
-		}
-		
-		override public function update():void
-		{
-			if (frozen && sprPlayer.currentAnim == "teleportIn" && sprPlayer.complete)
-				frozen = false;
-			
-			if (!frozen)
-			{
-				
-				//ground check
-				onGround = (collide("collisionGrid", x, y + 1) || (collide("PlatformGrid", x, y + 1) && !collide("PlatformGrid", x, y)) || dead);
-				if (!onGround)
-					landed = false;
-				if (onGround && !landed)
-				{
-					bounceCount = 0;
-					landed = true;
-				}	
-				//gravity
-				speed.y += gravity;
-				
-				if (!dead)
-				{
-					checkEnemyCollisons();					
-					checkForInput();
-					movement();
-				}
-				else
-				{
-					movement(false);
-				}
-			}
-			else
-			{
-				
-					//Game.reset = true;
-			}
-
-		}
-
-		
-
 	}
 }
